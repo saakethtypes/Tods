@@ -1,0 +1,21 @@
+html{
+    height: 100%;
+
+}
+img {
+    max-width: 100%;
+    width: 15em;
+    height: 15em;
+}
+
+.SideContainer {
+    background-color: brown;
+    width: 100%;
+    height: 100%;
+}
+.RegisterButton{
+    top:10px;
+    left: 10%;
+    padding-top: 10em;
+}
+
