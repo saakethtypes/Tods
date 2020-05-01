@@ -20,13 +20,14 @@ app.use("/user", user_routes);
 
 //production
 if(process.env.NODE_ENV==='production'){
-  app.use(express.static('../tods/build'));
+  app.use(express.static(__dirname +'/tods/build'));
   app.get('*',(req,res)=> res.sendFile(path.resolve(
-    __dirname,'../tods','build','index.html'
+    __dirname,'tods','build','index.html'
   )))
 }
+
 console.log(path.resolve(
-  __dirname,'../tods','build','index.html'
+  __dirname,'tods','build','index.html'
 ))
 //Mongoose
 const connectDb = async () => {
@@ -45,5 +46,5 @@ const connectDb = async () => {
 connectDb();
 
 //Server
-const PORT = process.env.SERVER_PORT;
+const PORT = process.env.SERVER_PORT||8080;
 app.listen(PORT, console.log(`Server running on ${PORT}`.blue.bold));
