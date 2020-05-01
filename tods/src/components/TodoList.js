@@ -1,55 +1,78 @@
-import React, { useContext, useEffect } from "react";
-import "../App.css";
-
-//importing compenents
-//importing context which is data we work with
-import { GlobalContext } from "../context/GlobalState";
+// Using an ES6 transpiler like Babel
+import {
+  SortableContainer,
+  SortableHandle,
+  SortableElement
+} from "react-sortable-hoc";
 import { Todo } from "./Todo";
+import { GlobalContext } from "../context/GlobalState";
 
-export const TodoList = () => {
-  //use Context to get the data in the context
+import React, { useEffect, useContext } from "react";
 
+const arrayMove = require("array-move");
+
+const DragHandle = SortableHandle(() => (
+  <div className="grab">
+    <span
+      class="iconify"
+      data-icon="octicon:grabber"
+      data-inline="false"
+    ></span>
+  </div>
+));
+const SortableItem = SortableElement(({ todo }) => (
+  <li>
+    <Todo key={todo._id} todo={todo} />
+    <DragHandle />
+  </li>
+));
+
+const SortableList = SortableContainer(({ children }) => {
+  return <ul>{children}</ul>;
+});
+
+export const SortableTodoList = () => {
+  let { todos, getTodos, updateTodoPos } = useContext(GlobalContext);
   useEffect(() => {
     getTodos();
     //eslint-disable-next-line
   }, []);
+  let items = todos;
+  items = items.filter(function (el) {
+    return el != null;
+  });
 
-  let { todos, getTodos } = useContext(GlobalContext);
-  let unfinished = 0;
-  for (let i = 0; i < todos.length; i++) {
-    if (todos[i].status === false) {
-      unfinished += 1;
-    }
-  }
-
-  //using {} to get the variable from the Globalcontext named as todos
-
-  //using {todos} in html to get the variable used i.e todos mentioned above
-  //using .map() to get one object from the todos array
-  //using <Todo/> component to render the single todo object by passing
-  // the object as a parameter to the compenent. while doing so we need
-  //to mention a key param to tell react each object is unique
-  // we say that by giving the todoobject's id as the key.
-
+  let onSortEnd = ({ oldIndex, newIndex }) => {
+    items = arrayMove(items, oldIndex, newIndex);
+    updateTodoPos(items);
+  };
   return (
-    <div>
-      <h3>Tods</h3>
-      <div className="User">
-        <label>{unfinished} Pending</label>
-      </div>
-      <li class="list-info">
-      <div className="Todo">
-          {todos.map(todo =>
-            todo.star ? <Todo key={todo._id} todo={todo} /> : null
-          )}
-          {todos
-            .sort((a, b) => b.importance - a.importance)
-            .map(todo =>
-              todo.star ? null : <Todo key={todo._id} todo={todo} />
-            )}
+    <div className="todoList">
+      <SortableList
+        lockAxis="y"
+        onSortEnd={onSortEnd}
+        useDragHandle
+        getContainer
+        lockToContainerEdges={true}
+        useWindowAsScrollContainer={false}
+      >
+        {items.map((todo, index) => (
+          <SortableItem key={`item-${todo._id}`} index={index} todo={todo} />
+        ))}
+      </SortableList>
+      {items.length > 0 ? null : (
+        <div className="AllDone">
+          <span
+            class="iconify"
+            data-icon="mdi:meditation"
+            data-inline="false"
+          ></span>
+          <p className="stats">
+            {" "}
+            Try meditating to procastinate your work. It helps you get them done faster.
+          </p>
         </div>
-      </li>
-
+      )}
     </div>
   );
 };

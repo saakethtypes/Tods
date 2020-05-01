@@ -2,7 +2,8 @@ import React, { useContext, useState } from "react";
 import { GlobalContext } from "../context/GlobalState";
 import { Content } from "./Content";
 import { AddContent } from "./AddContent";
-import { EditTodo } from "./EditTodo";
+//import { EditTodo } from "./EditTodo";
+import { store } from "react-notifications-component";
 
 //Since we need the todo to render this component we add it to our params
 //this <todo/> compenent is passed on with a todo object in the
@@ -27,45 +28,95 @@ export const Todo = ({ todo }) => {
     z ? setz(false) : setz(true);
   };
 
-  const { checked, livesort } = useContext(GlobalContext);
-  const [importance_edit, setImportance] = useState(todo.importance);
+  const { checked } = useContext(GlobalContext);
 
   const editToggle = () => {
     b ? setb(false) : setb(true);
   };
 
+  let taskname = todo.task;
+  taskname = taskname.charAt(0).toUpperCase() + taskname.slice(1);
+  const { edit_todo_title } = useContext(GlobalContext);
+  const [edittask, setedittask] = useState(todo.task);
+
+  const editTodo = e => {
+    e.preventDefault();
+    edit_todo_title(edittask, todo._id);
+    setedittask(edittask);
+    setb(false);
+    store.addNotification({
+      title: "Typo? Lol",
+      message: "Editted your todo",
+      type: "success",
+      insert: "top",
+      container: "top-right",
+      animationIn: ["animated", "fadeIn"],
+      animationOut: ["animated", "fadeOut"],
+      dismiss: {
+        duration: 1000
+      }
+    });
+  };
   return (
-    <div>
-      <li>
-          <i class=" fa fa-ellipsis-v"></i>
-          <div class="task-checkbox">
-              <input type="checkbox" class="list-child" value={todo.status} onClick={() => checked(todo._id)} />
+    <div className="todo">
+      <div className="todoWrapper">
+        <div className="todoLine">
+          <div className="strike" onClick={() => checked(todo._id)}>
+            <span className={todo.status ? "striked" : "unstriked"}>
+              {taskname}
+            </span>
           </div>
-          <input
-            type="number"
-            value={importance_edit}
-            onChange={e => setImportance(e.target.value)}
-            placeholder="0"
-            onClick={() => livesort(todo._id, importance_edit)}
-          />
-          <div class="task-title">
-              <span class="task-title-sp" className={todo.status ? "cross" : "nocross"}>{todo.task}</span>
-              <span class="badge bg-important">{todo.importance}</span>
-              <div class="pull-right hidden-phone">
-                  <button class="btn btn-success btn-xs fa fa-pencil" onClick={addComment}></button>
-                  <button class="btn btn-success btn-xs fa fa-pencil" onClick={editToggle}></button>
-                  <button class="btn btn-primary btn-xs fa fa-pencil"  onClick={viewComment}></button>
-                  <button class="btn btn-danger btn-xs fa fa-trash-o" onClick={() => delete_todo(todo._id, uid)}></button>
-              </div>
-        {y ? 
-        todo.content.map(content => (
-              <Content key={content._id} content={content} tid={todo._id} />
-            ))
-          : null}
-        {z ? 
-        <AddContent todo_id={todo._id} /> : null}
-        {b ? <EditTodo todo_id={todo._id} /> : null}
-          </div></li>   
+        </div>
+        <div className="todoButtons">
+          <div className="deletebut" onClick={() => delete_todo(todo._id, uid)}>
+            <span
+              class="iconify"
+              data-icon="ri:delete-bin-6-fill"
+              data-inline="false"
+            ></span>
+          </div>
+          <div className="editTaskbut" onClick={editToggle}>
+            <span
+              class="iconify"
+              data-icon="ri:edit-fill"
+              data-inline="false"
+            ></span>
+          </div>
+          <div className="addContentbut" onClick={addComment}>
+            <span
+              class="iconify"
+              data-icon="ic:baseline-playlist-add"
+              data-inline="false"
+            ></span>
+          </div>
+          <div className="viewCommentsbut" onClick={viewComment}>
+            <span
+              class="iconify"
+              data-icon="ic:round-filter-list"
+              data-inline="false"
+            ></span>
+          </div>
+        </div>
+      </div>
+      {y
+        ? todo.content.map(content => (
+            <Content key={content._id} content={content} tid={todo._id} />
+          ))
+        : null}
+      {z ? <AddContent todo_id={todo._id} /> : null}
+      {b ? (
+        <form onSubmit={editTodo}>
+          <div className="EditandAdd">
+            <input
+              type="text"
+              value={edittask}
+              className="Editinput"
+              onChange={e => setedittask(e.target.value)}
+            />
+            <div className="multiplybut">*</div>
+          </div>
+        </form>
+      ) : null}
     </div>
   );
 };

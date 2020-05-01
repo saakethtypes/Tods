@@ -16,18 +16,16 @@ export const AddContent = ({ todo_id }) => {
   };
 
   return (
-    <div className="form-control">
+    <div className="EditandAdd">
       <form onSubmit={submitContent}>
-        <label htmlFor="content" className="pretty">
-          Add Content <br />
-        </label>
         <input
           type="text"
           value={newContent}
+          className="ContentInput"
           onChange={e => setNewContent(e.target.value)}
-          placeholder="Enter Content..."
+          placeholder="lot of work? oof"
         />
-        <button className="btn">Add</button>
+        <div className="Addcontentbut">+</div>
       </form>
     </div>
   );

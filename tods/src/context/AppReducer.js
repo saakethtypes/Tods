@@ -18,7 +18,8 @@ const appreducer = (state, action) => {
         todos: action.todos,
         count: action.count,
         users: action.users,
-        logged_in: true
+        logged_in: true,
+        billyage: action.billy
       };
     case "ERROR":
       return {
@@ -52,7 +53,7 @@ const appreducer = (state, action) => {
         ...state,
         //todos is now all the todos and the payload . here the payload
         //is the new todo object which got created in addtodo component
-        todos: [...state.todos, action.todo]
+        todos: [action.todo, ...state.todos]
       };
     case "ADD_CONTENT":
       return {
@@ -107,6 +108,12 @@ const appreducer = (state, action) => {
         todos: state.todos.map(todo =>
           todo._id === action.tid ? { ...todo, importance: action.imp } : todo
         )
+      };
+
+    case "UPDATESORT":
+      return {
+        ...state,
+        todos: action.payload
       };
 
     default:

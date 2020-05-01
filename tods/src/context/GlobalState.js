@@ -23,7 +23,9 @@ const initialState = {
   todos: [],
   error: "",
   loading: true,
-  logged_in: false
+  logged_in: false,
+  theme: "red",
+  billyage: 1
 };
 
 //create context with the initial data
@@ -48,6 +50,19 @@ export const GlobalProvider = ({ children }) => {
         }
       };
       await axios.post("/user/register", user, config);
+      store.addNotification({
+        title: `I'll help you manage your work, ${user.firstname}`,
+        message: "Meet Billyjean inside",
+        type: "success",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animated", "fadeIn"],
+        animationOut: ["animated", "fadeOut"],
+        dismiss: {
+          duration: 5000,
+          onScreen: true
+        }
+      });
     } catch (err) {
       dispatch({
         type: "ERROR",
@@ -73,10 +88,22 @@ export const GlobalProvider = ({ children }) => {
         auth.login(() => {
           props.history.push("/home");
         });
+        store.addNotification({
+          title: "Jillybean has missed you :3",
+          message: "Have you had a nice day yet?",
+          type: "success",
+          insert: "top",
+          container: "top-right",
+          animationIn: ["animated", "fadeIn"],
+          animationOut: ["animated", "fadeOut"],
+          dismiss: {
+            duration: 3000
+          }
+        });
       } else {
         store.addNotification({
-          title: res.data.msg,
-          message: "teodosii@react-notifications-component",
+          title: "Walnuts are recommended",
+          message: res.data.msg,
           type: "danger",
           insert: "top",
           container: "top-right",
@@ -169,6 +196,18 @@ export const GlobalProvider = ({ children }) => {
       dispatch({
         type: "DELETE_TODO",
         payload: id
+      });
+      store.addNotification({
+        title: "Indeed satisfaction",
+        message: "Deleted your todo",
+        type: "success",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animated", "fadeIn"],
+        animationOut: ["animated", "fadeOut"],
+        dismiss: {
+          duration: 1000
+        }
       });
     } catch (err) {
       dispatch({
@@ -298,6 +337,35 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
+  async function updateTodoPos(todos) {
+    try {
+      dispatch({
+        type: "UPDATESORT",
+        payload: todos
+      });
+    } catch (err) {
+      dispatch({
+        type: "ERROR",
+        payload: err.data
+      });
+    }
+  }
+
+  async function saveTodoSort(todos, user) {
+    let todosort = [];
+    for (let i = 0; i < todos.length; i++) {
+      todosort[i] = todos[i]._id;
+    }
+
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+        "x-auth-token": localStorage.getItem("jwt")
+      }
+    };
+    await axios.post(`/todos/save`, { data: todosort, user: user }, config);
+  }
+
   //return the ability to provide these functions and data to all the
   //components. Whatever is wrapped in the app.js with the <Provider/>
   //automatically becomes the {childeren} mention here. therfore those
@@ -325,7 +393,11 @@ export const GlobalProvider = ({ children }) => {
         error: state.error,
         loading: state.loading,
         user_logged: state.user_logged,
-        logged_in: state.logged_in
+        logged_in: state.logged_in,
+        theme: state.theme,
+        billyage: state.billyage,
+        updateTodoPos,
+        saveTodoSort
       }}
     >
       {children}

@@ -7,13 +7,11 @@ export const Content = ({ content, tid }) => {
     delete_content(id, tid);
   };
   return (
-    <div className="container">
-      <h4>
-        <p> {content.content_text}</p>
-        <button className="dlt-btn" onClick={() => deleteContent(content._id)}>
-          x
-        </button>
-      </h4>
+    <div className="contentView">
+      {content.content_text}
+      <div className="deleteContent" onClick={() => deleteContent(content._id)}>
+        x
+      </div>
     </div>
   );
 };

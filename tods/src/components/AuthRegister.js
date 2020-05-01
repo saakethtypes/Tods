@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { GlobalContext } from "../context/GlobalState";
+import { store } from "react-notifications-component";
 
 export const AuthRegister = () => {
   const [Fn, setFn] = useState("");
@@ -15,45 +16,89 @@ export const AuthRegister = () => {
       username: Username,
       password: Pass
     };
-    registerUser(user);
-    setUsername("");
-    setFn("");
-    setPass("");
+    if (Fn.length > 1 && Pass.length > 3 && Username.length > 3) {
+      registerUser(user);
+      setregisters(false);
+      setUsername("");
+      setFn("");
+      setPass("");
+    } else {
+      store.addNotification({
+        title: "Shorty",
+        message: "Username and Password are way too short",
+        type: "danger",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animated", "fadeIn"],
+        animationOut: ["animated", "fadeOut"],
+        dismiss: {
+          duration: 1000
+        }
+      });
+    }
   };
+
+  const [registers, setregisters] = useState(false);
+  const register = () => {
+    if (registers === false) {
+      setregisters(true);
+    } else {
+      setregisters(false);
+    }
+  };
+
   return (
     <div>
-      
-      <h3 className="pretty">Register</h3>
-      <form onSubmit={register_User}>
-        <div className="form-control">
-          <label className="pretty">First Name</label>
-          <input
-            type="text"
-            value={Fn}
-            onChange={e => setFn(e.target.value)}
-            placeholder="Add Firstname"
-          />
+      <div className="registerStyle">
+        <div className="RegisterButton">
+          <div className="registerbutton" onClick={register}>
+            Register
+          </div>
         </div>
-        <div className="form-control">
-          <label className="pretty">Username</label>
-          <input
-            type="text"
-            value={Username}
-            onChange={e => setUsername(e.target.value)}
-            placeholder="Add Username"
-          />
-        </div>
-        <div className="form-control">
-          <label className="pretty">Password</label>
-          <input
-            type="password"
-            value={Pass}
-            onChange={e => setPass(e.target.value)}
-            placeholder="Add Password"
-          />
-        </div>
-        <button className="btn"> Submit </button>
-      </form>
+        {registers ? (
+          <div className="RegisterBox">
+            <div>
+              <div>
+                <div>
+                  <h3>Sign up</h3>
+                  <form onSubmit={register_User}>
+                    <div id="usernamere">
+                      <input
+                        value={Username}
+                        id="Usernamee"
+                        placeholder="Set Username"
+                        onChange={e => setUsername(e.target.value)}
+                        type="text"
+                      ></input>
+                    </div>
+                    <div id="fnre">
+                      <input
+                        value={Fn}
+                        type="text"
+                        id="Usernamee"
+                        placeholder="Name"
+                        onChange={e => setFn(e.target.value)}
+                      ></input>
+                    </div>
+                    <div id="passre">
+                      <input
+                        value={Pass}
+                        id="Usernamee"
+                        placeholder="Set Password"
+                        onChange={e => setPass(e.target.value)}
+                        type="password"
+                      ></input>
+                    </div>
+                    <button class="button" type="submit">
+                      Register
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 };
