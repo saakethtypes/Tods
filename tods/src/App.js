@@ -22,7 +22,7 @@ function App() {
     //calling a component - <Component/>
 
     <div>
-      <BRouter basename = {"http://localhost:5000/"||""} history={history}>
+      <BRouter basename = "/" history={history}>
         <GlobalProvider>
           <ReactNotification />
           <div>

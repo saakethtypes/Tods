@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "server": "nodemon server",
-    "client": "cd.. && cd ./tods/ && npm start",
+    "client": "cd ./tods/ && npm start",
     "dev": "concurrently \" npm run server \" \" npm run client\" "
   },
   "author": "Saaketh",
