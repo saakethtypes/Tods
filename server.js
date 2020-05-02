@@ -23,8 +23,8 @@ app.use("/user", user_routes);
 
 //production
 if(process.env.NODE_ENV==='production'){
-  app.use(serveStatic(path.join(__dirname, 'tods','build')))
-  app.get('/todos',(req,res)=> res.sendFile(path.resolve(
+  app.use(express.static('tods/build'))
+  app.get('*',(req,res)=> res.sendFile(path.resolve(
     __dirname,'tods','build','index.html'
   )))
 }

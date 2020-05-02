@@ -4,11 +4,14 @@
   "description": "A Full Stack Todo App",
   "main": "server.js",
   "scripts": {
+    "client-install" : "npm install --prefix client",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "server": "nodemon server",
-    "client": "cd ./tods/ && npm start",
-    "dev": "concurrently \" npm run server \" \" npm run client\" "
+    "client": "cd.. && cd ./tods/ && npm start",
+    "dev": "concurrently \" npm run server \" \" npm run client\" ",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+
   },
   "author": "Saaketh",
   "license": "ISC",
@@ -34,5 +37,7 @@
     "nodemon": "^2.0.2",
     "url-loader": "^4.0.0"
   },
+  "react": "next",
+  "react-dom": "next",
   "homepage": "/"
 }
