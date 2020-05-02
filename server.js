@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const colors = require("colors");
 const bodyParser = require("body-parser");
+const serveStatic = require('serve-static')
+
 
 
 dotenv.config({ path: "./config.env" });
@@ -13,7 +15,6 @@ dotenv.config({ path: "./config.env" });
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
 //Routes
 const todo_routes = require("./routes/todoRoutes");
 const user_routes = require("./routes/userRoutes");
@@ -22,7 +23,7 @@ app.use("/user", user_routes);
 
 //production
 if(process.env.NODE_ENV==='production'){
-  app.use(express.static(__dirname +'/tods/build'));
+  app.use(serveStatic(path.join(__dirname, 'tods','build')))
   app.get('/*',(req,res)=> res.sendFile(path.resolve(
     __dirname,'tods','build','index.html'
   )))
