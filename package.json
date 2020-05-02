@@ -9,8 +9,8 @@
     "start": "node server.js",
     "server": "nodemon server",
     "client": "cd.. && cd ./tods/ && npm start",
-    "dev": "concurrently \" npm run server \" \" npm run client\" ",
-    "heroku-postbuild": "cd ./tods/ && NPM_CONFIG_PRODUCTION=false npm install && npm run build"
+    "dev": "concurrently \" npm run server \" \" npm run client\" "
+    //"heroku-postbuild": "cd ./tods/ && NPM_CONFIG_PRODUCTION=false npm install && npm run build"
   },
   "author": "Saaketh",
   "license": "ISC",
