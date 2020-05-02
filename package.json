@@ -10,7 +10,7 @@
     "server": "nodemon server",
     "client": "cd.. && cd ./tods/ && npm start",
     "dev": "concurrently \" npm run server \" \" npm run client\" ",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix tods && npm run build --prefix tods"
+    "heroku-postbuild": "npm run build --prefix tods"
 
   },
   "author": "Saaketh",
