@@ -34,7 +34,5 @@
     "nodemon": "^2.0.2",
     "url-loader": "^4.0.0"
   },
-  "react": "next",
-  "react-dom": "next",
   "homepage": "/"
 }
