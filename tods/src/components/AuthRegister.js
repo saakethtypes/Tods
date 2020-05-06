@@ -62,7 +62,6 @@ export const AuthRegister = () => {
             <div>
               <div>
                 <div>
-                  <h3>Sign up</h3>
                   <form onSubmit={register_User}>
                   <div id="fnre">
                       <input

@@ -399,7 +399,7 @@ body {
   padding: 1em;
   float: right;
   height: 100%;
-  color: blanchedalmond;
+  color: black;
   font-size: 25px;
   font-family: "Disposable DroidBBold";
 }
@@ -1084,7 +1084,7 @@ a {
   }
 
   .count {
-    font-size: 1.2em;
+    font-size: 1.4em;
     width: 10px;
   }
 
