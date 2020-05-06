@@ -96,7 +96,11 @@ const appreducer = (state, action) => {
           action.tid === todo._id
             ? {
                 ...todo,
-                content: action.cont
+                content: [
+                  ...todo.content.filter(
+                    contents => action.payload !== contents._id
+                  )
+                ] //action.cont
               }
             : todo
         )

@@ -25,7 +25,7 @@ export const AddContent = ({ todo_id }) => {
           onChange={e => setNewContent(e.target.value)}
           placeholder="lot of work? oof"
         />
-        <div className="Addcontentbut">+</div>
+        <button className="Addcontentbutin">+</button>
       </form>
     </div>
   );

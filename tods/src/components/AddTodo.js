@@ -16,12 +16,7 @@ export const AddTodo = uid => {
     const newTodo = {
       id: Math.floor(Math.random() * 10000000),
       task: task,
-      content: [
-        {
-          id: Math.floor(Math.random() * 10000000),
-          content_text: "Add Content"
-        }
-      ],
+      content: [],
       status: false,
       star: false,
       importance: 10
@@ -33,15 +28,20 @@ export const AddTodo = uid => {
       add_todo(newTodo, uid.uid);
       setTask("");
       store.addNotification({
-        title: "Added!",
-        message: "Nice :}",
-        type: "success",
+        message: "Adding",
+        type: "info",
         insert: "top",
         container: "top-right",
-        animationIn: ["animated", "fadeIn"],
+        animationIn: ["animated", "bounceIn"],
         animationOut: ["animated", "fadeOut"],
         dismiss: {
           duration: 1000
+        },
+        touch:true,
+        slidingExit: {
+          duration: 800,
+          timingFunction: 'ease-out',
+          delay: 0
         }
       });
     } else {
@@ -67,7 +67,8 @@ export const AddTodo = uid => {
               value={task}
               onChange={e => setTask(e.target.value)}
             />
-            <button class="button">+</button>
+            <button class="button"><div className="plusbut">+
+            </div></button>
           </div>
         </form>
       </div>

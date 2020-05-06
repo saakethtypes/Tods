@@ -1,14 +1,19 @@
 /* 9c89b8 
 ca7df9*/
 :root {
-  --theme: white;
-  --thm: cornsilk;
-  --thmt: rgb(159, 131, 202);
-  --textthm: darkgrey;
-  --line: white;
+  --theme: localStorage.getItem("theme");
+  --thm: localStorage.getItem("thm");
+  --thmt: localStorage.getItem("thmt");
+  --textthm: localStorage.getItem("textthm");
+  --line: localStorage.getItem("line");
 }
-body{
-  background-color: black;
+body {
+  background-color: #efbba0;
+  user-select: none; /* supported by Chrome and Opera */
+   -webkit-user-select: none; /* Safari */
+   -khtml-user-select: none; /* Konqueror HTML */
+   -moz-user-select: none; /* Firefox */
+   -ms-user-select: none; /* Internet Explorer/Edge */
 }
 @font-face {
   font-family: "Disposable DroidBB";
@@ -80,11 +85,24 @@ body{
 }
 
 body {
-  background-image: url("./assets/mountains-2311699_1280.jpg");
+
+
+  width: 100%;
+  height: 100%;
+
+}
+
+.bg {
+  background-image: url("./assets/background.png");
   background-repeat: no-repeat;
   background-color: black;
-  background-position: 100% 0px;
+  background-position: 0px 0px;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  background-attachment: fixed;
 }
+
 .home {
   background-color: var(--thm);
   height: 100%;
@@ -120,9 +138,10 @@ body {
 .home .Logobar {
   background-color: black;
   height: 10vh;
-  padding-left: 25px;
+  padding-left: 15px;
   color: #3f70bb;
   font-size: 2.9em;
+  padding-top: 5px;
   border-bottom: 3px solid var(--theme);
   font-family: "Disposable DroidBBold";
 }
@@ -137,8 +156,11 @@ body {
   background-color: var(--thm);
 }
 @media (min-width: 1000px) {
-  body{
+  body {
     background-color: black;
+  }
+  .bg{
+    background-position: 100% 40%;
   }
   .home .todoList {
     position: absolute;
@@ -147,7 +169,7 @@ body {
     padding: 2em;
     overflow-x: hidden;
     overflow-y: scroll;
-    height: 80%;
+    height: 85%;
     scroll-behavior: smooth;
   }
 
@@ -172,8 +194,7 @@ body {
     left: 5%;
     position: relative;
     width: 78%;
-    color: var(--theme);
-    font-size: 1.2em;
+    font-size: 1.3em;
     padding-top: 0.3em;
   }
   .todoButtons {
@@ -215,7 +236,7 @@ body {
     display: inline-block;
   }
   .home .todoLine {
-    max-width: 140vh;
+    max-width: 100%;
   }
   .home .sideBar {
     position: absolute;
@@ -226,6 +247,40 @@ body {
     height: 90%;
     background-color: var(--thm);
   }
+  .home .todoButtons {
+    right: 10%;
+  }
+  .home .deletebut {
+    height: 15px;
+    width: 15px;
+    padding-right: 1em;
+  }
+
+  .home .viewCommentsbut {
+    height: 15px;
+    width: 15px;
+    padding-right: 2.5em;
+  }
+
+  .home .editTaskbut {
+    height: 15px;
+    width: 15px;
+    padding-right: 2.5em;
+  }
+  .home .todoInputs .button {
+    padding-bottom: 0.5em;
+    padding-top: 10px;
+    left: 0%;
+    height: 40px;
+    position: relative;
+    text-align: center;
+  }
+
+  .home .AllDone .iconify {
+    height: 40%;
+    width: 40%;
+  }
+
   .home .footer {
     position: absolute;
     bottom: 0px;
@@ -259,6 +314,34 @@ body {
   outline: none;
   font-family: "Disposable DroidBB";
 }
+
+.loginInputs .button {
+  width: 50%;
+}
+
+.loginInputs .button:hover {
+  width: 60%;
+}
+
+.RegisterBox .button {
+  width: 70%;
+}
+
+.RegisterBox .button:hover {
+  width: 80%;
+}
+
+.home .Logobar {
+  background-color: black;
+  height: 10vh;
+  padding-left: 15px;
+  color: #3f70bb;
+  font-size: 3.2em;
+  padding-top: 7px;
+  border-bottom: 3px solid var(--theme);
+  font-family: "Disposable DroidBBold";
+}
+
 .taskinputl {
   letter-spacing: 2px;
   font-size: 20px;
@@ -301,6 +384,7 @@ body {
   text-align: center;
   color: #3f70bb;
   box-shadow: none;
+  background-color: transparent;
   border-radius: 0.1em;
   border-top: orchid;
   border-right: orchid;
@@ -351,6 +435,8 @@ body {
   padding-right: 1em;
   font-size: 0.7em;
   cursor: pointer;
+  top: 20%;
+  position: relative;
 }
 
 .User {
@@ -381,7 +467,7 @@ body {
   padding: 2em;
   overflow-x: hidden;
   overflow-y: scroll;
-  height: 82%;
+  height: 83%;
   background-color: var(--thmt);
   scroll-behavior: smooth;
 }
@@ -389,6 +475,7 @@ body {
 .count {
   padding-left: 10px;
   padding-bottom: 1em;
+  position: relative;
 }
 .greet {
   padding-left: 10px;
@@ -405,7 +492,7 @@ body {
 .chill {
   text-align: center;
   font-size: 1.3em;
-  top: 20%;
+  top: 30%;
   left: -15%;
   position: relative;
 }
@@ -434,6 +521,12 @@ body {
 
 .importance {
   width: 2em;
+}
+
+.dotss .dot{
+  position: relative;
+  left:-10%;
+  margin-left: 10px;
 }
 
 @keyframes strike {
@@ -515,11 +608,20 @@ body {
   border-color: var(--theme);
 }
 
-.todoInputs {
+.todoInputs .button {
   padding-bottom: 0.5em;
   padding-top: 10px;
+  background-color: rgb(104, 26, 192);
+  left: 22%;
+  height: 40px;
+  position: relative;
   text-align: center;
-  padding-right: 1em;
+}
+
+.plusbut {
+  float: center;
+  top: -8px;
+  position: relative;
 }
 
 .home .button {
@@ -551,9 +653,6 @@ body {
   background-color: var(--thmt);
 }
 
-.todoLine {
-  float: left;
-}
 .todoButtons {
   float: right;
 }
@@ -561,18 +660,21 @@ body {
   display: inline-block;
   *display: inline;
   zoom: 1;
+  max-width: 76%;
 }
 
 .addContent {
   background-color: var(--textthm);
   height: 25px;
 }
+
 .grab {
   height: 20px;
   width: 20px;
   float: right;
-  top: -50px;
   position: relative;
+  cursor: pointer;
+  bottom: 48px;
 }
 .grab .iconify {
   width: 35px;
@@ -587,21 +689,25 @@ body {
   width: 25px;
   height: 25px;
 }
+
 .todoButtons {
   display: inline-block;
   position: absolute;
   float: right;
   right: 10%;
-  width: 30%;
+  max-width: 40%;
 }
+
 .deletebut {
   display: inline;
   float: right;
   padding-left: 5px;
   position: relative;
+  cursor: pointer;
 }
+
 .todoLine {
-  max-width: 70%;
+  float: left;
 }
 
 .deletebut:hover .iconify {
@@ -612,6 +718,8 @@ body {
   display: inline;
   float: right;
   padding-left: 5px;
+  cursor: pointer;
+
   position: relative;
 }
 .editTaskbut:hover .iconify {
@@ -621,31 +729,41 @@ body {
 .viewCommentsbut {
   display: inline;
   float: right;
+  cursor: pointer;
   padding-left: 5px;
   position: relative;
 }
+
 .viewCommentsbut:hover .iconify {
   color: var(--theme);
 }
 
-.addContentbut {
+.Addcontentbutin {
+  background-color: var(--thmt);
   display: inline;
-  float: right;
-  padding-left: 5px;
+  float: left;
+  outline: none;
   position: relative;
+  border: 0px solid;
+  color: var(--theme);
+  font-size: 1.5em;
+  padding-right: -1em;
+  left: -10px;
 }
 .addContentbut:hover .iconify {
   color: var(--theme);
 }
 
 .contentView {
-  color: var(--theme);
+  color: var(--textthm);
   left: 10%;
   position: relative;
   width: 80%;
-  font-size: 1.1em;
+  font-size: 1.3em;
   padding-top: 0.9em;
 }
+
+
 .deleteContent {
   color: red;
   display: inline;
@@ -681,6 +799,7 @@ body {
   outline: none;
   border-color: var(--theme);
 }
+
 .home .multiplybut {
   color: rgb(101, 86, 240);
   font-weight: bold;
@@ -690,6 +809,7 @@ body {
   float: left;
   padding-right: 1em;
 }
+
 .Addcontentbut {
   color: rgb(104, 26, 192);
   font-weight: bold;
@@ -698,6 +818,7 @@ body {
   float: left;
   padding-right: 1em;
 }
+
 .ContentInput {
   background-color: var(--thmt);
   letter-spacing: 2px;
@@ -719,19 +840,37 @@ body {
   width: 70%;
   height: 70%;
 }
+
 .AllDone {
   text-align: center;
   padding-top: 2em;
   color: var(--thm);
 }
-
-.tree {
-  position: absolute;
-  background-color: var(--thm);
-  top: 70%;
-  width: 30%;
-  height: 25%;
+.stats {
+  padding: 1px;
+  padding-top: 20px;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+	font-size: 1.2em;
+	font-weight:  100;
+	letter-spacing: 2px;
+	text-align: center;
+	color: #f35626;
+	background-image: -webkit-linear-gradient(120deg, var(--theme), #4eec9d, var(--textthm));
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	-webkit-animation: hue 2.5s infinite linear;
 }
+
+@keyframes hue {
+  from {
+    -webkit-filter: hue-rotate(0deg);
+  }
+  to {
+    -webkit-filter: hue-rotate(-360deg);
+  }
+}
+
+
 a {
   color: inherit;
 }
@@ -750,22 +889,18 @@ a {
   padding: 1em;
   display: inline;
 }
+
 .tree2 {
   padding: 1em;
   left: -60px;
   top: -40px;
   display: inline;
 }
+
 .tree3 {
   padding: 1em;
   left: -20px;
   top: 2px;
-  display: inline;
-}
-.tree4 {
-  padding: 1em;
-  left: 20px;
-  top: 5px;
   display: inline;
 }
 
@@ -777,42 +912,92 @@ a {
   padding: 2px;
   cursor: pointer;
 }
+.loader {
+  position: relative;
+  left: 40%;
+  top: 40%;
+}
+
+.Artwork{
+  font-size: 0.8em;
+  color: darkslateblue;
+  position: absolute;
+  bottom:0;
+  right: 20px;
+  padding-bottom: 20px;
+  position: fixed;
+}
 
 @media (max-width: 500px) {
   .MobileDisclaimer {
     display: inline-block;
     font-size: 1em;
+    visibility: hidden;
     text-align: center;
     font-weight: bold;
     padding: 5px;
   }
+
+  .loginInputs {
+    padding-top: 10em;
+    color: #3f70bb;
+    text-align: center;
+    outline: none;
+    font-family: "Disposable DroidBB";
+    padding-right: -10px;
+  }
+
+  .loginInputs .button {
+    width: 50%;
+    font-size: 1.4em;
+  }
+  .loginInputs .button:hover {
+    width: 60%;
+  }
+
   .todoList ul {
     padding-left: 2px;
   }
 
   .todoList {
     padding: 1px;
+    padding-top: 10px;
   }
+
   .addTodo {
     padding-top: 0.5em;
-    top: 50%;
+    position: Ab;
+    top: 60%;
   }
+
+
+  .loader {
+    position: relative;
+    left: 30%;
+    top: 40%;
+  }
+
   .greet {
     font-size: 1.5em;
     width: 20%;
   }
+
   .chill {
     position: relative;
     font-size: 1.3em;
     bottom: 0px;
     left: 5px;
-    top: 35%;
+    top: 0%;
+    font-size: 1.1em;
+  }
+
+  .handels {
+    height: 2px;
   }
   .count {
     font-size: 1.5em;
     width: 20%;
   }
-
   .tree3 {
     left: -70px;
   }
@@ -821,25 +1006,33 @@ a {
   }
   .taskinputl {
     width: 80px;
+    font-size: 1.2em;
   }
   .RegisterBox {
     left: 20%;
     width: 40%;
     padding: 0;
   }
+
   #Usernamee {
     width: 180px;
   }
+
   .button {
     width: 2em;
   }
+
   .button:hover {
     width: 3em;
   }
+
   .trees {
     height: 0px;
     width: 20px;
     top: 50%;
+  }
+  .tree {
+    visibility: hidden;
   }
   .tree3 {
     top: 70%;
@@ -848,24 +1041,305 @@ a {
   .trees img {
     top: -30vh;
   }
+
   .loginStyle {
     width: 35%;
   }
+
+  .deletebut {
+    height: 5px;
+    width: 5px;
+    padding-right: 20px;
+  }
+
+  .viewCommentsbut {
+    height: 5px;
+    width: 5px;
+    padding-right: 20px;
+  }
+
+  .editTaskbut {
+    height: 5px;
+    width: 5px;
+    padding-right: 20px;
+  }
+
+  .todoInputs button {
+    text-align: center;
+  }
+
+  .todoInputs .button {
+    font-size: 1.7em;
+    height: 30px;
+    width: 40px;
+    text-align: center;
+    top: 10px;
+    left: -5px;
+    position: relative;
+  }
+
+  .plusbut {
+    position: relative;
+    top: -10px;
+  }
+
+  .count {
+    font-size: 1.2em;
+    width: 10px;
+  }
+
+  .greet {
+    font-size: 1.4em;
+  }
+
+  .chill {
+    font-size: 1.1em;
+  }
+
+  .todoLine {
+    font-size: 0.9em;
+  }
+
+  .trees {
+    position: relative;
+    left: 2%;
+    top: 70%;
+  }
+
+  .tree2 {
+    visibility: hidden;
+  }
+
+  .contentView {
+    font-size: 1.1em;
+  }
+
+  .strike {
+    color: cornsilk;
+    position: relative;
+    display: block;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.3em;
+  }
+
+  .strike:before,
+  .strike:after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 3px;
+    top: 50%;
+    margin-top: -0.5px;
+    background: #fff;
+  }
+
+  .strike:before {
+    left: -10px;
+  }
+  .strike:after {
+    right: 5px;
+    background: #fff;
+    transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  .strike:hover:before {
+    background: transparent;
+    width: 100%;
+    transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  .strike:hover:after {
+    background: transparent;
+    width: 0%;
+
+    transition: 0s;
+  }
+
+  .striked {
+    text-decoration: line-through;
+    position: relative;
+    color: var(--line);
+    text-decoration-color: var(--theme);
+    transition: linear 0.6s;
+  }
+  .unstriked {
+    color: var(--textthm);
+    text-decoration-color: var(--theme);
+    transition: linear 0.6s;
+  }
+  .grab {
+    left: -8px;
+    float: left;
+    position: relative;
+    cursor: pointer;
+    top: -45px;
+    padding-right: 10px;
+    padding-left: -1px;
+  }
+
+  .grab .iconify {
+    height: 23px;
+    width: 23px;
+  }
+  .todoButtons {
+    display: inline-block;
+    position: absolute;
+    float: right;
+    right: 6%;
+    width: 40%;
+  }
+
+  .deletebut {
+    height: 15px;
+    width: 15px;
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+
+  .viewCommentsbut {
+    height: 15px;
+    width: 15px;
+    padding-right: 15px;
+  }
+
+  .editTaskbut {
+    height: 15px;
+    width: 15px;
+    padding-right: 15px;
+  }
+  .deletebut .iconify {
+    height: 20px;
+    width: 20px;
+  }
+
+  .viewCommentsbut .iconify {
+    height: 20px;
+    width: 20px;
+  }
+
+  .editTaskbut .iconify {
+    height: 20px;
+    width: 20px;
+  }
+  
+  .dotss .dot{
+    position: relative;
+    left:-2%;
+    margin-left: 3px;
+  }
+  
+  .night .iconify{
+    height: 24px;
+    width: 24px;
+  }
+
+  .night{
+    position: absolute;
+    left: 7px;
+    top: 25px;
+  }
+
+  .bg{
+    background-position: 40% 50%;
+  }
+
+  #Usernamee{
+  width: 100%;
+  font-size: 1.1em;
+  position: relative;
+  }
+
+  .RegisterBox{
+    position: absolute;
+    left:60%;
+    padding-top: 10px;
+  }
+
+  .RegisterBox .button{
+    height: 30px;
+    width: 70%;
+    padding-top: 2px;
+    font-size: 1.3em;
+  }
+
+  .home .Logobar {
+    background-color: black;
+    height: 10vh;
+    padding-left: 15px;
+    color: #3f70bb;
+    font-size: 2.3em;
+    padding-top: 5px;
+    border-bottom: 3px solid var(--theme);
+    font-family: "Disposable DroidBBold";
+  }
+
+  .Artwork{
+    font-size: 0.6em;
+    color: darkslateblue;
+    position: absolute;
+    bottom:0;
+    right: 20px;
+    padding-bottom: 20px;
+    position: fixed;
+  }
+  
 }
+
 body {
   overflow-y: hidden; /* Hide vertical scrollbar */
   overflow-x: hidden; /* Hide horizontal scrollbar */
 }
+
 .home .todoList {
   overflow-style: var(--theme);
 
   overflow-y: scroll; /* Hide vertical scrollbar */
   overflow-x: hidden;
 }
+
 .todoList::-webkit-scrollbar {
   width: 2.5px;
   background: var(--theme);
 }
+
 .todoList::-webkit-scrollbar-thumb {
   background: var(--thm);
+}
+
+@media (max-width: 300px) {
+  .count {
+    font-size: 1em;
+  }
+
+  .todoInputs .button {
+    position: relative;
+    left: 20%;
+  }
+
+  .loader {
+    position: relative;
+    left: 25%;
+    top: 30%;
+  }
+
+  .trees {
+    position: relative;
+    left: -30%;
+    top: 70%;
+  }
+
+  .tree {
+    visibility: hidden;
+  }
+
+  .todoInputs .button {
+    position: relative;
+    left: -20px;
+  }
+
+  .greet {
+    font-size: 1.3em;
+  }
+
 }

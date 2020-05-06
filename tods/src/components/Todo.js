@@ -18,14 +18,10 @@ export const Todo = ({ todo }) => {
   //since while delting a todo we must exactly know what todo it is
   //we need to pass on its id to the delete_todo function as a param.
   const [y, sety] = useState(false);
-  const [z, setz] = useState(false);
   const [b, setb] = useState(false);
 
   const viewComment = () => {
     y ? sety(false) : sety(true);
-  };
-  const addComment = () => {
-    z ? setz(false) : setz(true);
   };
 
   const { checked } = useContext(GlobalContext);
@@ -33,13 +29,16 @@ export const Todo = ({ todo }) => {
   const editToggle = () => {
     b ? setb(false) : setb(true);
   };
-
+  const taskcheck = (tid) => {
+    strikeed ? setstrikeed(false) : setstrikeed(true);
+    checked(tid);
+  };
   let taskname = todo.task;
   taskname = taskname.charAt(0).toUpperCase() + taskname.slice(1);
   const { edit_todo_title } = useContext(GlobalContext);
   const [edittask, setedittask] = useState(todo.task);
 
-  const editTodo = e => {
+  const editTodo = (e) => {
     e.preventDefault();
     edit_todo_title(edittask, todo._id);
     setedittask(edittask);
@@ -53,16 +52,17 @@ export const Todo = ({ todo }) => {
       animationIn: ["animated", "fadeIn"],
       animationOut: ["animated", "fadeOut"],
       dismiss: {
-        duration: 1000
-      }
+        duration: 1000,
+      },
     });
   };
+  const [strikeed, setstrikeed] = useState(todo.status);
   return (
     <div className="todo">
       <div className="todoWrapper">
         <div className="todoLine">
-          <div className="strike" onClick={() => checked(todo._id)}>
-            <span className={todo.status ? "striked" : "unstriked"}>
+          <div className="strike" onClick={() => taskcheck(todo._id)}>
+            <span className={strikeed ? "striked" : "unstriked"}>
               {taskname}
             </span>
           </div>
@@ -82,13 +82,6 @@ export const Todo = ({ todo }) => {
               data-inline="false"
             ></span>
           </div>
-          <div className="addContentbut" onClick={addComment}>
-            <span
-              class="iconify"
-              data-icon="ic:baseline-playlist-add"
-              data-inline="false"
-            ></span>
-          </div>
           <div className="viewCommentsbut" onClick={viewComment}>
             <span
               class="iconify"
@@ -99,11 +92,11 @@ export const Todo = ({ todo }) => {
         </div>
       </div>
       {y
-        ? todo.content.map(content => (
+        ? todo.content.map((content) => (
             <Content key={content._id} content={content} tid={todo._id} />
           ))
         : null}
-      {z ? <AddContent todo_id={todo._id} /> : null}
+      {y ? <AddContent todo_id={todo._id} /> : null}
       {b ? (
         <form onSubmit={editTodo}>
           <div className="EditandAdd">
@@ -111,7 +104,7 @@ export const Todo = ({ todo }) => {
               type="text"
               value={edittask}
               className="Editinput"
-              onChange={e => setedittask(e.target.value)}
+              onChange={(e) => setedittask(e.target.value)}
             />
             <div className="multiplybut">*</div>
           </div>

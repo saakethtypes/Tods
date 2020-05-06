@@ -5,6 +5,9 @@ const Content = require("../models/Content");
 const auth = require("../controllers/authMiddleware");
 const express = require("express");
 const mongodb = require("mongodb");
+const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
+dotenv.config({ path: "../config.env" });
 
 // @route GET /todos
 exports.getTodos = async (req, res, next) => {
@@ -229,5 +232,36 @@ exports.saveSort = async (req, res, next) => {
       success: false,
       err: error
     });
+  }
+};
+
+exports.verify = async (req,res,next)=>{
+  let token = req.body.token
+
+  jwt.verify(token,process.env.JWT_SECRET,(err)=>{
+    if(err){
+      res.send({veri:false})}
+      else{
+        res.send({veri:true})
+      }
+  }) 
+}
+
+exports.saveTheme = async (req, res, next) => {
+  try {
+
+    let savedthemeuser = [req.body.theme,
+      req.body.thm,req.body.textthm]
+ 
+    const user = await User.findByIdAndUpdate({'_id':req.body.user}, {
+      user_theme: savedthemeuser
+    });
+    
+    console.log(user.user_theme)
+    return res.json({
+      themes: user,
+      msg:"Saved theme"});
+  } catch (err) {
+    return res.json({err:"err"});
   }
 };

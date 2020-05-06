@@ -17,15 +17,14 @@ const initialState = {
     user_todos: [
       "5e7c71dd564c8d3bf837a26c",
       "5e7c721f564c8d3bf837a26e",
-      "5e7c7254564c8d3bf837a272"
-    ]
+      "5e7c7254564c8d3bf837a272",
+    ],
   },
   todos: [],
   error: "",
   loading: true,
   logged_in: false,
-  theme: "red",
-  billyage: 1
+  theme: "red"
 };
 
 //create context with the initial data
@@ -46,13 +45,18 @@ export const GlobalProvider = ({ children }) => {
     try {
       const config = {
         headers: {
-          "Content-type": "application/json"
-        }
+          "Content-type": "application/json",
+        },
       };
+    localStorage.setItem("theme","rgb(79, 253, 216)");
+    localStorage.setItem("thm","black");
+    localStorage.setItem("thmt", "rgb(22, 22, 22)");
+    localStorage.setItem("textthm", "cornsilk");
+    localStorage.setItem("line", "grey");
       await axios.post("/user/register", user, config);
       store.addNotification({
-        title: `I'll help you manage your work, ${user.firstname}`,
-        message: "Meet Billyjean inside",
+        title: "Let's achieve great things together",
+        message: `I'll help you manage your work, ${user.firstname}`,
         type: "success",
         insert: "top",
         container: "top-right",
@@ -60,22 +64,42 @@ export const GlobalProvider = ({ children }) => {
         animationOut: ["animated", "fadeOut"],
         dismiss: {
           duration: 5000,
-          onScreen: true
-        }
+          onScreen: true,
+        },
       });
     } catch (err) {
       dispatch({
         type: "ERROR",
-        payload: err.data
+        payload: err.data,
       });
     }
+  }
+  
+  async function persist(props) {
+    const token = localStorage.getItem("jwt");
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+      },
+    };
+    if (token) {
+      const res = await axios.post("/todos/verify",{"token":String(token)},config)
+      let verified = res.data.veri
+        if(!verified){
+          localStorage.removeItem("jwt")
+        }else{
+          auth.login(() => {
+          props.history.push("/home");
+      });
+        }
+      }
   }
 
   async function loginUser(uname, pass, props) {
     const config = {
       headers: {
-        "Content-type": "application/json"
-      }
+        "Content-type": "application/json",
+      },
     };
 
     let usercred = { username: uname, password: pass };
@@ -97,8 +121,8 @@ export const GlobalProvider = ({ children }) => {
           animationIn: ["animated", "fadeIn"],
           animationOut: ["animated", "fadeOut"],
           dismiss: {
-            duration: 3000
-          }
+            duration: 3000,
+          },
         });
       } else {
         store.addNotification({
@@ -111,18 +135,18 @@ export const GlobalProvider = ({ children }) => {
           animationOut: ["animated", "fadeOut"],
           dismiss: {
             duration: 5000,
-            onScreen: true
-          }
+            onScreen: true,
+          },
         });
       }
       dispatch({
         type: "LOGIN_USER",
-        logged: res.data.logged
+        logged: res.data.logged,
       });
     } catch (err) {
       dispatch({
         type: "ERROR",
-        payload: err.data
+        payload: err.data,
       });
     }
   }
@@ -131,7 +155,7 @@ export const GlobalProvider = ({ children }) => {
     localStorage.removeItem("jwt");
     console.log("User logged out");
     dispatch({
-      type: "LOGOUT"
+      type: "LOGOUT",
     });
   }
 
@@ -139,8 +163,8 @@ export const GlobalProvider = ({ children }) => {
     try {
       const config = {
         headers: {
-          "x-auth-token": localStorage.getItem("jwt")
-        }
+          "x-auth-token": localStorage.getItem("jwt"),
+        },
       };
 
       const res = await axios.get("/todos", config);
@@ -148,13 +172,13 @@ export const GlobalProvider = ({ children }) => {
         type: "GET_TODOS",
         todos: res.data.todos,
         count: res.data.count,
-        users: res.data.user
+        users: res.data.user,
       });
     } catch (err) {
       console.log("Error at getTodos");
       dispatch({
         type: "ERROR",
-        payload: err.data
+        payload: err.data,
       });
     }
   }
@@ -163,8 +187,8 @@ export const GlobalProvider = ({ children }) => {
     const config = {
       headers: {
         "Content-type": "application/json",
-        "x-auth-token": localStorage.getItem("jwt")
-      }
+        "x-auth-token": localStorage.getItem("jwt"),
+      },
     };
 
     try {
@@ -173,12 +197,12 @@ export const GlobalProvider = ({ children }) => {
         type: "ADD_TODO",
         uid: uid,
         todo: res.data.data,
-        tid: res.data.data._id
+        tid: res.data.data._id,
       });
     } catch (err) {
       dispatch({
         type: "ERROR",
-        payload: err.data
+        payload: err.data,
       });
     }
   }
@@ -187,15 +211,15 @@ export const GlobalProvider = ({ children }) => {
   async function delete_todo(id, uid) {
     const config = {
       headers: {
-        "x-auth-token": localStorage.getItem("jwt")
-      }
+        "x-auth-token": localStorage.getItem("jwt"),
+      },
     };
     try {
       await axios.delete(`/todos/${id}`, config);
 
       dispatch({
         type: "DELETE_TODO",
-        payload: id
+        payload: id,
       });
       store.addNotification({
         title: "Indeed satisfaction",
@@ -206,13 +230,13 @@ export const GlobalProvider = ({ children }) => {
         animationIn: ["animated", "fadeIn"],
         animationOut: ["animated", "fadeOut"],
         dismiss: {
-          duration: 1000
-        }
+          duration: 500,
+        },
       });
     } catch (err) {
       dispatch({
         type: "ERROR",
-        payload: err.data
+        payload: err.data,
       });
     }
   }
@@ -221,23 +245,23 @@ export const GlobalProvider = ({ children }) => {
     imp = parseInt(imp);
     const config = {
       headers: {
-        "x-auth-token": localStorage.getItem("jwt")
-      }
+        "x-auth-token": localStorage.getItem("jwt"),
+      },
     };
     try {
       let impr = {
-        imp: imp
+        imp: imp,
       };
       let res = await axios.patch(`/todos/live/${tid}`, impr, config);
       dispatch({
         type: "LIVE_SORT",
         tid: tid,
-        imp: res.data.imp
+        imp: res.data.imp,
       });
     } catch (err) {
       dispatch({
         type: "ERROR",
-        payload: err.data
+        payload: err.data,
       });
     }
   }
@@ -247,20 +271,20 @@ export const GlobalProvider = ({ children }) => {
       const config = {
         headers: {
           "Content-type": "application/json",
-          "x-auth-token": localStorage.getItem("jwt")
-        }
+          "x-auth-token": localStorage.getItem("jwt"),
+        },
       };
       const res = await axios.post(`/todos/${todo_id}`, content, config);
 
       dispatch({
         type: "ADD_CONTENT",
         tid: todo_id,
-        payload: res.data.content
+        payload: content,
       });
     } catch (err) {
       dispatch({
         type: "ERROR",
-        payload: err.datam
+        payload: err.datam,
       });
     }
   }
@@ -269,22 +293,22 @@ export const GlobalProvider = ({ children }) => {
     try {
       const config = {
         headers: {
-          "x-auth-token": localStorage.getItem("jwt")
-        }
+          "x-auth-token": localStorage.getItem("jwt"),
+        },
       };
 
-      let s = "d";
+      let s = "filler";
       const res = await axios.put(`/todos/${todo_id}`, s, config);
 
       dispatch({
         type: "CHECKED",
         tid: todo_id,
-        stat: res.data.data
+        stat: res.data.data,
       });
     } catch (err) {
       dispatch({
         type: "ERROR",
-        payload: err.data
+        payload: err.data,
       });
     }
   }
@@ -294,23 +318,23 @@ export const GlobalProvider = ({ children }) => {
       const config = {
         headers: {
           "Content-type": "application/json",
-          "x-auth-token": localStorage.getItem("jwt")
-        }
+          "x-auth-token": localStorage.getItem("jwt"),
+        },
       };
       const edittedTask = {
-        task: editted
+        task: editted,
       };
 
       const res = await axios.patch(`todos/${tid}`, edittedTask, config);
       dispatch({
         type: "EDIT_TODO_TITLE",
         title: res.data.data,
-        todo_id: tid
+        todo_id: tid,
       });
     } catch (err) {
       dispatch({
         type: "ERROR",
-        payload: err.data
+        payload: err.data,
       });
     }
   }
@@ -319,34 +343,43 @@ export const GlobalProvider = ({ children }) => {
     try {
       const config = {
         headers: {
-          "x-auth-token": localStorage.getItem("jwt")
-        }
+          "x-auth-token": localStorage.getItem("jwt"),
+        },
       };
       const res = await axios.delete(`/todos/${tidd}/${cid}`, config);
       dispatch({
         type: "DELETE_CONTENT",
         payload: cid,
         tid: tidd,
-        cont: res.data.data.content
+        cont: res.data.data.content,
       });
     } catch (err) {
       dispatch({
         type: "ERROR",
-        payload: err.data
+        payload: err.data,
       });
     }
   }
+
+  async function saveTheme(theme,thm,thmt,tx,l) {
+    
+    localStorage.setItem("theme",theme);
+    localStorage.setItem("thm",thm);
+    localStorage.setItem("thmt", thmt);
+    localStorage.setItem("textthm", tx);
+    localStorage.setItem("line", l);
+   }
 
   async function updateTodoPos(todos) {
     try {
       dispatch({
         type: "UPDATESORT",
-        payload: todos
+        payload: todos,
       });
     } catch (err) {
       dispatch({
         type: "ERROR",
-        payload: err.data
+        payload: err.data,
       });
     }
   }
@@ -360,11 +393,14 @@ export const GlobalProvider = ({ children }) => {
     const config = {
       headers: {
         "Content-type": "application/json",
-        "x-auth-token": localStorage.getItem("jwt")
-      }
+        "x-auth-token": localStorage.getItem("jwt"),
+      },
     };
     await axios.post(`/todos/save`, { data: todosort, user: user }, config);
   }
+
+
+
 
   //return the ability to provide these functions and data to all the
   //components. Whatever is wrapped in the app.js with the <Provider/>
@@ -397,7 +433,9 @@ export const GlobalProvider = ({ children }) => {
         theme: state.theme,
         billyage: state.billyage,
         updateTodoPos,
-        saveTodoSort
+        saveTodoSort,
+        persist,
+        saveTheme
       }}
     >
       {children}

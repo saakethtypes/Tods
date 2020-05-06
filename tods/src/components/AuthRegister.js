@@ -11,8 +11,10 @@ export const AuthRegister = () => {
 
   const register_User = e => {
     e.preventDefault();
+    let firstname = Fn;
+    firstname = firstname.charAt(0).toUpperCase() + firstname.slice(1);
     let user = {
-      firstname: Fn,
+      firstname: firstname,
       username: Username,
       password: Pass
     };
@@ -62,6 +64,15 @@ export const AuthRegister = () => {
                 <div>
                   <h3>Sign up</h3>
                   <form onSubmit={register_User}>
+                  <div id="fnre">
+                      <input
+                        value={Fn}
+                        type="text"
+                        id="Usernamee"
+                        placeholder="Name"
+                        onChange={e => setFn(e.target.value)}
+                      ></input>
+                      </div>
                     <div id="usernamere">
                       <input
                         value={Username}
@@ -70,16 +81,7 @@ export const AuthRegister = () => {
                         onChange={e => setUsername(e.target.value)}
                         type="text"
                       ></input>
-                    </div>
-                    <div id="fnre">
-                      <input
-                        value={Fn}
-                        type="text"
-                        id="Usernamee"
-                        placeholder="Name"
-                        onChange={e => setFn(e.target.value)}
-                      ></input>
-                    </div>
+                    </div>    
                     <div id="passre">
                       <input
                         value={Pass}

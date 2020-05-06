@@ -16,7 +16,8 @@ exports.registerUser = async (req, res, next) => {
       username: req.body.username,
       password: hash,
       firstname: req.body.firstname,
-      user_todos: req.body.user_todos
+      user_todos: req.body.user_todos,
+      user_theme: req.body.user_theme
     };
     //Db save
     user = await User.create(user);

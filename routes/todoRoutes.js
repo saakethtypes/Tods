@@ -13,12 +13,16 @@ const {
   addContent,
   checkTodo,
   liveTodo,
-  saveSort
+  saveSort,
+  verify,
+  saveTheme
 } = require("../controllers/todoController");
 
 //Route config
 router.route("/").get(auth, getTodos).post(auth, addTodo);
 router.route("/save").post(saveSort);
+router.route("/verify").post(verify);
+router.route("/savetheme").post(saveTheme);
 
 router
   .route("/:id")

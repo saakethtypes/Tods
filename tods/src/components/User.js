@@ -45,7 +45,7 @@ export const User = uid => {
           You have, <p className="unfinished">{unfistr}</p> unfinished tasks.
         </h3>
         <div className="trees">
-          <img src={treefinal4} alt="BillyJean" />
+          <img className="tree"src={treefinal4} alt="BillyJean" />
           <img className="tree3" src={treefinal3} alt="BillyJean" />
 
         </div>

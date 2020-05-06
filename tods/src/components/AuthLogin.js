@@ -1,19 +1,18 @@
 import React, { useState, useContext } from "react";
 import { GlobalContext } from "../context/GlobalState";
 
-export const AuthLogin = props => {
+export const AuthLogin = (props) => {
   const [userName, setUsername] = useState("");
   const [pass, setPass] = useState("");
-  const { loginUser } = useContext(GlobalContext);
+  const { loginUser, persist } = useContext(GlobalContext);
 
-  const login = e => {
+  const login = (e) => {
     e.preventDefault();
-
     loginUser(userName, pass, props);
     setUsername("");
     setPass("");
   };
-
+  persist(props);
   return (
     <div>
       <div className="loginStyle">
@@ -28,7 +27,7 @@ export const AuthLogin = props => {
                     className="taskinputl"
                     value={userName}
                     placeholder="Username"
-                    onChange={e => setUsername(e.target.value)}
+                    onChange={(e) => setUsername(e.target.value)}
                   />
                 </div>
                 <div id="Pass">
@@ -37,17 +36,18 @@ export const AuthLogin = props => {
                     type="password"
                     placeholder="Password"
                     value={pass}
-                    onChange={e => setPass(e.target.value)}
+                    onChange={(e) => setPass(e.target.value)}
                   />
                 </div>
-                <button class="button" type="submit">
+                <button className="button" type="submit">
                   Login
                 </button>
               </form>
             </div>
           </nav>
-          <div className="MobileDisclaimer"> Although you can use this website, it is not designed optimally for small screens.
-          A mobile app is coming soon. :/ </div>
+          <div className="Artwork">
+              Illustration by Meenakshi 
+          </div>
         </div>
       </div>
     </div>

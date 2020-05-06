@@ -1,16 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { GlobalContext } from "../context/GlobalState";
 
 export const Footer = () => {
+  const { saveTheme } = useContext(GlobalContext);
+
   const [y, sety] = useState(false);
   const [bd, setBd] = useState(false);
-  const [thm, setThm] = useState("black");
-  const [thmt, setThmt] = useState("rgb(22, 22, 22)");
-  const [textthm, setTextthm] = useState("cornsilk");
-  const [line, setLine] = useState("dimgrey");
-  const [theme, setTheme] = useState("#ca7df9");
-  function themePick(themecolor, thm, thmt) {
+  const [thm, setThm] = useState(localStorage.getItem("thm"));
+  const [thmt, setThmt] = useState(localStorage.getItem("thmt"));
+  const [textthm, setTextthm] = useState(localStorage.getItem("textthm"));
+  const [line, setLine] = useState(localStorage.getItem("line"));
+  const [theme, setTheme] = useState(localStorage.getItem("theme"));
+
+  function themePick(themecolor, thm, thmt, tx, l) {
     setTheme(themecolor);
     sety(false);
+    saveTheme(themecolor, thm, thmt, tx, l);
   }
 
   function toggleDark(bd) {
@@ -18,16 +23,18 @@ export const Footer = () => {
       setTheme(theme);
       setThm("black");
       setThmt("rgb(22, 22, 22)");
-      setTextthm("cornsilk");
       setLine("grey");
+      setTextthm("cornsilk");
       setBd(false);
+      saveTheme(theme, "black", "rgb(22, 22, 22)", "cornsilk", "grey");
     } else {
       setTheme(theme);
       setThm("cornsilk");
       setThmt("rgb(227, 215, 241)");
+      setLine("darkgray");
       setTextthm("dimgrey");
-      setLine("darkgrey");
       setBd(true);
+      saveTheme(theme, "cornsilk", "rgb(227, 215, 241)", "dimgrey", "darkgray");
     }
   }
 
@@ -37,11 +44,26 @@ export const Footer = () => {
   const toggleBd = () => {
     bd ? toggleDark(false) : toggleDark(true);
   };
-  document.documentElement.style.setProperty("--theme", theme);
-  document.documentElement.style.setProperty("--thm", thm);
-  document.documentElement.style.setProperty("--thmt", thmt);
-  document.documentElement.style.setProperty("--textthm", textthm);
-  document.documentElement.style.setProperty("--line", line);
+  document.documentElement.style.setProperty(
+    "--theme",
+    localStorage.getItem("theme")
+  );
+  document.documentElement.style.setProperty(
+    "--thm",
+    localStorage.getItem("thm")
+  );
+  document.documentElement.style.setProperty(
+    "--thmt",
+    localStorage.getItem("thmt")
+  );
+  document.documentElement.style.setProperty(
+    "--textthm",
+    localStorage.getItem("textthm")
+  );
+  document.documentElement.style.setProperty(
+    "--line",
+    localStorage.getItem("line")
+  );
 
   return (
     <div className="footer">
@@ -53,46 +75,51 @@ export const Footer = () => {
         ></span>
 
         {y ? (
-          <div>
+          <div className="dotss">
             <span
               className="dot"
-              onClick={e => themePick("#FFE74C", thm, thmt)}
-              style={{ backgroundColor: "#FFE74C", left: "20%" }}
+              onClick={(e) => themePick("#FFE74C", thm, thmt,textthm,line)}
+              style={{ backgroundColor: "#FFE74C"}}
             ></span>
             <span
               className="dot"
-              onClick={e => themePick("#61D095", thm, thmt)}
-              style={{ backgroundColor: "#61D095", left: "16%" }}
+              onClick={(e) => themePick("#61D095", thm, thmt,textthm,line)}
+              style={{ backgroundColor: "#61D095" }}
             ></span>
             <span
               className="dot"
-              onClick={e => themePick("#FF5964", thm, thmt)}
-              style={{ backgroundColor: "#FF5964", left: "18%" }}
+              onClick={(e) => themePick("#FF5964", thm, thmt,textthm,line)}
+              style={{ backgroundColor: "#FF5964" }}
             ></span>
             <span
               className="dot"
-              onClick={e => themePick("rgb(79, 253, 216)", thm, thmt)}
-              style={{ backgroundColor: "rgb(79, 253, 216)", left: "6%" }}
+              onClick={(e) => themePick("rgb(79, 253, 216)", thm, thmt,textthm,line)}
+              style={{ backgroundColor: "rgb(79, 253, 216)" }}
             ></span>
             <span
               className="dot"
-              onClick={e => themePick("#ca7df9", thm, thmt)}
-              style={{ backgroundColor: "#ca7df9", left: "8%" }}
+              onClick={(e) => themePick("#ca7df9", thm, thmt,textthm,line)}
+              style={{ backgroundColor: "#ca7df9" }}
             ></span>
             <span
               className="dot"
-              onClick={e => themePick("#EA2B1F", thm, thmt)}
-              style={{ backgroundColor: "#EA2B1F", left: "10%" }}
+              onClick={(e) => themePick("#EA2B1F", thm, thmt,textthm,line)}
+              style={{ backgroundColor: "#EA2B1F" }}
             ></span>
             <span
               className="dot"
-              onClick={e => themePick("#7209B7", thm, thmt)}
-              style={{ backgroundColor: "#7209B7", left: "12%" }}
+              onClick={(e) => themePick("#7209B7", thm, thmt,textthm,line)}
+              style={{ backgroundColor: "#7209B7" }}
             ></span>
             <span
               className="dot"
-              onClick={e => themePick("#F1FFC4", thm, thmt)}
-              style={{ backgroundColor: "#F1FFC4", left: "14%" }}
+              onClick={(e) => themePick("#F1FFC4", thm, thmt,textthm,line)}
+              style={{ backgroundColor: "#F1FFC4" }}
+            ></span>
+            <span
+              className="dot"
+              onClick={(e) => themePick("#3333ff", thm, thmt,textthm,line)}
+              style={{ backgroundColor: "#3333ff",paddingLeft:"10px",position:"relative" }}
             ></span>
           </div>
         ) : null}
@@ -103,14 +130,15 @@ export const Footer = () => {
             data-inline="false"
           ></span>
         </div>
-        
-          <a href= "https://github.com/saakethtypes"> 
+
+        <a href="https://github.com/saakethtypes/tods" target="_blank"> 
           <i class="fa fa-flag fa-github fa-2x" aria-hidden="true"></i>
-           </a>
-           <a href= "https://www.instagram.com/saaketh89/">
-        <i class="fa fa-flag fa-instagram fa-2x" aria-hidden="true"></i>
-        </a><a href= "https://www.twitch.tv/saaketh56">
-        <i class="fa fa-flag fa-twitch fa-2x" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.instagram.com/saaketh89/" target="_blank">
+          <i class="fa fa-flag fa-instagram fa-2x" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.twitch.tv/saaketh56" target="_blank">
+          <i class="fa fa-flag fa-twitch fa-2x" aria-hidden="true"></i>
         </a>
       </div>
     </div>

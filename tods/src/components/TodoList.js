@@ -2,12 +2,13 @@
 import {
   SortableContainer,
   SortableHandle,
-  SortableElement
+  SortableElement,
 } from "react-sortable-hoc";
 import { Todo } from "./Todo";
 import { GlobalContext } from "../context/GlobalState";
 
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
+import { RingSpinner } from "react-spinners-kit";
 
 const arrayMove = require("array-move");
 
@@ -31,28 +32,35 @@ const SortableList = SortableContainer(({ children }) => {
   return <ul>{children}</ul>;
 });
 
-export const SortableTodoList = () => {
-  let { todos, getTodos, updateTodoPos } = useContext(GlobalContext);
-  useEffect(() => {
-    getTodos();
-    //eslint-disable-next-line
-  }, []);
-  let items = todos;
-  items = items.filter(function (el) {
-    return el != null;
-  });
 
+
+
+export const SortableTodoList = () => {
+  let { todos, getTodos, updateTodoPos,users } = useContext(GlobalContext);
+  const [itemsl, setitemsl] = useState({'todos':[],'loaded':true})
+  console.log("load Status",itemsl.loaded)
+  useEffect(() => {
+    
+    getTodos()
+    //eslint-disable-next-line
+  }, [])
+  itemsl.todos = todos 
+  let items = itemsl.todos
+  items = items.filter(function (el) {  
+    return el != null;
+  }); 
+  
   let onSortEnd = ({ oldIndex, newIndex }) => {
     items = arrayMove(items, oldIndex, newIndex);
     updateTodoPos(items);
   };
+  
   return (
     <div className="todoList">
       <SortableList
         lockAxis="y"
         onSortEnd={onSortEnd}
         useDragHandle
-        getContainer
         lockToContainerEdges={true}
         useWindowAsScrollContainer={false}
       >
@@ -60,6 +68,7 @@ export const SortableTodoList = () => {
           <SortableItem key={`item-${todo._id}`} index={index} todo={todo} />
         ))}
       </SortableList>
+      
       {items.length > 0 ? null : (
         <div className="AllDone">
           <span
@@ -69,7 +78,8 @@ export const SortableTodoList = () => {
           ></span>
           <p className="stats">
             {" "}
-            Try meditating to procastinate your work. It helps you get them done faster.
+            Try meditating to procastinate your work. It helps you get them done
+            faster.
           </p>
         </div>
       )}

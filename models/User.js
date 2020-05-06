@@ -23,9 +23,9 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now()
   },
-  logged: {
-    type: Boolean,
-    default: false
+  user_theme:{
+    type:[String],
+    default:["black","cornsilk","#ca7df9"]
   }
 });
 

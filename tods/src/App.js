@@ -1,6 +1,10 @@
-import React from "react";
+import React  from "react";
 import "./App.css";
-import { BrowserRouter as BRouter, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as BRouter,
+  Route,
+  Switch
+} from "react-router-dom";
 import history from "./components/history";
 import ReactNotification from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
@@ -17,12 +21,9 @@ import { SortableTodoList } from "./components/TodoList";
 
 //App
 function App() {
-  console.log("dasd",window.location.pathname)
   return (
-    //calling a component - <Component/>
-
     <div>
-      <BRouter basename = "/" history={history}>
+      <BRouter basename="/" history={history}>
         <GlobalProvider>
           <ReactNotification />
           <div>
