@@ -139,13 +139,16 @@ export const Footer = () => {
           ></span>
         </div>
 
-        <a href="https://github.com/saakethtypes/tods" target="_blank"> 
+        <a href="https://github.com/saakethtypes/tods" target="_blank"
+        rel="noopener noreferrer"> 
           <i class="fa fa-flag fa-github fa-2x" aria-hidden="true"></i>
         </a>
-        <a href="https://www.instagram.com/saaketh89/" target="_blank">
+        <a href="https://www.instagram.com/saaketh89/" target="_blank"
+        rel="noopener noreferrer">
           <i class="fa fa-flag fa-instagram fa-2x" aria-hidden="true"></i>
         </a>
-        <a href="https://www.twitch.tv/saaketh56" target="_blank">
+        <a href="https://www.twitch.tv/saaketh56" target="_blank"
+        rel="noopener noreferrer">
           <i class="fa fa-flag fa-twitch fa-2x" aria-hidden="true"></i>
         </a>
       </div>

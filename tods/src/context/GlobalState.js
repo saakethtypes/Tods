@@ -220,7 +220,6 @@ export const GlobalProvider = ({ children }) => {
     };
     try {
       await axios.delete(`/todos/${id}`, config);
-
       dispatch({
         type: "DELETE_TODO",
         payload: id,
@@ -245,31 +244,6 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
-  async function livesort(tid, imp) {
-    imp = parseInt(imp);
-    const config = {
-      headers: {
-        "x-auth-token": localStorage.getItem("jwt"),
-      },
-    };
-    try {
-      let impr = {
-        imp: imp,
-      };
-      let res = await axios.patch(`/todos/live/${tid}`, impr, config);
-      dispatch({
-        type: "LIVE_SORT",
-        tid: tid,
-        imp: res.data.imp,
-      });
-    } catch (err) {
-      dispatch({
-        type: "ERROR",
-        payload: err.data,
-      });
-    }
-  }
-
   async function add_content(content, todo_id) {
     try {
       const config = {
@@ -278,12 +252,11 @@ export const GlobalProvider = ({ children }) => {
           "x-auth-token": localStorage.getItem("jwt"),
         },
       };
-      await axios.post(`/todos/${todo_id}`, content, config);
-
+      const res = await axios.post(`/todos/${todo_id}`, content, config);
       dispatch({
         type: "ADD_CONTENT",
         tid: todo_id,
-        payload: content,
+        payload: res.data.content,
       });
     } catch (err) {
       dispatch({
@@ -303,7 +276,7 @@ export const GlobalProvider = ({ children }) => {
 
       let s = "filler";
       const res = await axios.put(`/todos/${todo_id}`, s, config);
-
+      
       dispatch({
         type: "CHECKED",
         tid: todo_id,
@@ -332,8 +305,9 @@ export const GlobalProvider = ({ children }) => {
       const res = await axios.patch(`todos/${tid}`, edittedTask, config);
       dispatch({
         type: "EDIT_TODO_TITLE",
-        title: res.data.data,
+        title: editted,
         todo_id: tid,
+        cont : res.data.data.content
       });
     } catch (err) {
       dispatch({
@@ -350,12 +324,11 @@ export const GlobalProvider = ({ children }) => {
           "x-auth-token": localStorage.getItem("jwt"),
         },
       };
-      const res = await axios.delete(`/todos/${tidd}/${cid}`, config);
+      await axios.delete(`/todos/${tidd}/${cid}`, config);
       dispatch({
         type: "DELETE_CONTENT",
         payload: cid,
-        tid: tidd,
-        cont: res.data.data.content,
+        tid: tidd
       });
     } catch (err) {
       dispatch({
@@ -424,7 +397,6 @@ export const GlobalProvider = ({ children }) => {
         add_todo,
         add_content,
         checked,
-        livesort,
         edit_todo_title,
         delete_content,
         getTodos,

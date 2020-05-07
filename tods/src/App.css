@@ -98,14 +98,18 @@ body {
   background-color: black;
   background-position: 0px 0px;
   background-size: cover;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background-attachment: fixed;
 }
 
 .home {
-  background-color: var(--thm);
+  background-color: var(--thmt);
+  overflow-x: hidden;
+  overflow-y: hidden;
+  width: 100%;
   height: 100%;
+  height: 100vh;
 }
 
 .home .sideBar {
@@ -763,15 +767,17 @@ body {
   padding-top: 0.9em;
 }
 
-
 .deleteContent {
   color: red;
   display: inline;
   float: left;
   font-weight: bold;
   font-size: 1em;
-  padding-right: 1em;
+  padding-right: 0;
   cursor: pointer;
+  position: relative;
+  left:-20px;
+  
 }
 
 .EditandAdd {
@@ -1262,18 +1268,18 @@ a {
     padding-top: 2px;
     font-size: 1.3em;
   }
-
+  
   .home .Logobar {
-    background-color: black;
     height: 10vh;
     padding-left: 15px;
     color: #3f70bb;
     font-size: 2.3em;
-    padding-top: 5px;
+    padding-top: 1vh;
     border: 3px solid var(--theme);
     border-top: hidden;
     border-left: hidden;
-    border-right: hidden;
+    border-right: hidden; 
+    
     font-family: "Disposable DroidBBold";
   }
 
@@ -1290,6 +1296,10 @@ a {
 }
 
 body {
+  overflow-y: hidden; /* Hide vertical scrollbar */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+.home{
   overflow-y: hidden; /* Hide vertical scrollbar */
   overflow-x: hidden; /* Hide horizontal scrollbar */
 }
@@ -1310,7 +1320,41 @@ body {
   background: var(--thm);
 }
 
-@media (max-width: 300px) {
+@media (pointer:none), (pointer:coarse) {
+  .home .Logobar {
+    height: 10vh;
+    padding-left: 15px;
+    color: #3f70bb;
+    font-size: 2.3em;
+    padding-top: 1vh;
+    border: 10px solid var(--theme);
+    border-top: hidden;
+    border-left: hidden;
+    border-right: hidden; 
+    font-family: "Disposable DroidBBold";
+  }
+  .home{
+    height: 100vh;
+    width: 100vw;
+    overflow-y: hidden;
+  }
+}
+
+
+@media (max-width: 290px) {
+  .Addcontentbutin {
+    background-color: var(--thmt);
+    display: inline;
+    float: left;
+    outline: none;
+    position: relative;
+    border: 0px solid;
+    color: var(--theme);
+    font-size: 1em;
+    padding-right: -1em;
+    left: -10px;
+  }
+  
   .count {
     font-size: 1em;
   }
@@ -1319,6 +1363,21 @@ body {
     position: relative;
     left: 20%;
   }
+
+  .home .Logobar {
+    background-color: black;
+    height: 10vh;
+    padding-left: 15px;
+    color: #3f70bb;
+    font-size: 2.3em;
+    padding-top: 5px;
+    border: 3px solid var(--theme);
+    border-top: hidden;
+    border-left: hidden;
+    border-right: hidden;
+    font-family: "Disposable DroidBBold";
+  }
+
 
   .loader {
     position: relative;

@@ -93,7 +93,7 @@ const appreducer = (state, action) => {
 
     case "DELETE_CONTENT":
       return {
-        ...state,
+        ...state, 
         todos: state.todos.map(todo =>
           action.tid === todo._id
             ? {

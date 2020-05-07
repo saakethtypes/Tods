@@ -7,8 +7,7 @@ import {
 import { Todo } from "./Todo";
 import { GlobalContext } from "../context/GlobalState";
 
-import React, { useEffect, useContext, useState } from "react";
-import { RingSpinner } from "react-spinners-kit";
+import React, { useEffect, useContext } from "react";
 
 const arrayMove = require("array-move");
 
@@ -37,7 +36,7 @@ const SortableList = SortableContainer(({ children }) => {
 
 export const SortableTodoList = () => {
   let { todos, getTodos, updateTodoPos,users } = useContext(GlobalContext);
-  const [itemsl, setitemsl] = useState({'todos':[],'loaded':true})
+  const itemsl = {'todos':[],'loaded':true}
   console.log("load Status",itemsl.loaded)
   console.log(users)
   useEffect(() => {

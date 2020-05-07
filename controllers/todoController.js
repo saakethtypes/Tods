@@ -109,7 +109,7 @@ exports.addContent = async (req, res, next) => {
         content: cont
       });
     }
-  } catch (err) {
+  } catch (error) {
     //error response
     if (error.name === "ValidationError") {
       const msgs = Object.values(error.errors).map(val => val.message);
@@ -130,20 +130,19 @@ exports.deleteContent = async (req, res, next) => {
   try {
     //delete element from array in object
     //$pull for delete $push for add
-    await Todo.findByIdAndUpdate(
+    const todo = await Todo.findByIdAndUpdate(
       { _id: req.params.tid },
       { $pull: { content: { _id: req.params.cid } } }
-    );
-    const utodo = await Todo.findById(req.params.tid);
-    return res.status(200).json({
-      success: true,
-      msg: "Content has been deleted",
-      data: utodo
-    });
+    )
+    
+    return res.json({
+      msg:"Content deleted"
+    })
   } catch (err) {
     return res.json({ err: err });
   }
 };
+
 //check uncheck of todo
 //to use boolens use .length as an alternative
 exports.checkTodo = async (req, res, next) => {
