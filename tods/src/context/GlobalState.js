@@ -8,16 +8,13 @@ import { store } from "react-notifications-component";
 const initialState = {
   user_logged: "",
   users: {
-    _id: "5e7d9afc65df735f10a78734",
-    firstname: "Saaketh",
+    _id: "",
+    firstname: "",
     user_sections: [],
     logged: false,
-    username: "saaketh67",
-    password: "password",
+    username: "",
+    password: "",
     user_todos: [
-      "5e7c71dd564c8d3bf837a26c",
-      "5e7c721f564c8d3bf837a26e",
-      "5e7c7254564c8d3bf837a272",
     ],
   },
   todos: [],
@@ -48,12 +45,15 @@ export const GlobalProvider = ({ children }) => {
           "Content-type": "application/json",
         },
       };
-    localStorage.setItem("theme","rgb(79, 253, 216)");
-    localStorage.setItem("thm","black");
-    localStorage.setItem("thmt", "rgb(22, 22, 22)");
-    localStorage.setItem("textthm", "cornsilk");
-    localStorage.setItem("line", "grey");
+    
       await axios.post("/user/register", user, config);
+      // dispatch({
+      //   type: "REGISTER_USER",
+      //   uid: uid,
+      //   todo: res.data.data,
+      //   tid: res.data.data._id,
+      // });
+      
       store.addNotification({
         title: "Let's achieve great things together",
         message: `I'll help you manage your work, ${user.firstname}`,
@@ -109,9 +109,15 @@ export const GlobalProvider = ({ children }) => {
 
       if (res.data.logged) {
         console.log("User logged");
+        dispatch({
+          type: "LOGIN_USER",
+          logged: res.data.logged,
+          fn:res.data
+        });
         auth.login(() => {
           props.history.push("/home");
         });
+        console.log("asdas",res.data.fn)
         store.addNotification({
           title: "Jillybean has missed you :3",
           message: "Have you had a nice day yet?",
@@ -123,6 +129,7 @@ export const GlobalProvider = ({ children }) => {
           dismiss: {
             duration: 3000,
           },
+
         });
       } else {
         store.addNotification({
@@ -139,10 +146,7 @@ export const GlobalProvider = ({ children }) => {
           },
         });
       }
-      dispatch({
-        type: "LOGIN_USER",
-        logged: res.data.logged,
-      });
+      
     } catch (err) {
       dispatch({
         type: "ERROR",
@@ -274,7 +278,7 @@ export const GlobalProvider = ({ children }) => {
           "x-auth-token": localStorage.getItem("jwt"),
         },
       };
-      const res = await axios.post(`/todos/${todo_id}`, content, config);
+      await axios.post(`/todos/${todo_id}`, content, config);
 
       dispatch({
         type: "ADD_CONTENT",
@@ -368,6 +372,7 @@ export const GlobalProvider = ({ children }) => {
     localStorage.setItem("thmt", thmt);
     localStorage.setItem("textthm", tx);
     localStorage.setItem("line", l);
+    console.log("saved")
    }
 
   async function updateTodoPos(todos) {

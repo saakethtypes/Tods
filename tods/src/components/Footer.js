@@ -6,11 +6,11 @@ export const Footer = () => {
 
   const [y, sety] = useState(false);
   const [bd, setBd] = useState(false);
-  const [thm, setThm] = useState(localStorage.getItem("thm"));
-  const [thmt, setThmt] = useState(localStorage.getItem("thmt"));
-  const [textthm, setTextthm] = useState(localStorage.getItem("textthm"));
-  const [line, setLine] = useState(localStorage.getItem("line"));
-  const [theme, setTheme] = useState(localStorage.getItem("theme"));
+  const [thm, setThm] = useState("");
+  const [thmt, setThmt] = useState("");
+  const [textthm, setTextthm] = useState("");
+  const [line, setLine] = useState("");
+  const [theme, setTheme] = useState("#ca7df9");
 
   function themePick(themecolor, thm, thmt, tx, l) {
     setTheme(themecolor);
@@ -65,6 +65,14 @@ export const Footer = () => {
     localStorage.getItem("line")
   );
 
+  if(!localStorage.getItem("line")){
+      setThm("black");
+      setThmt("rgb(22, 22, 22)");
+      setLine("grey");
+      setTextthm("cornsilk");
+      setBd(false);
+    saveTheme(theme, "black", "rgb(22, 22, 22)", "cornsilk", "grey");
+  }
   return (
     <div className="footer">
       <div className="handels">

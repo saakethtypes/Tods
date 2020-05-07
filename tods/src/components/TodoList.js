@@ -22,7 +22,7 @@ const DragHandle = SortableHandle(() => (
   </div>
 ));
 const SortableItem = SortableElement(({ todo }) => (
-  <li>
+  <li key={todo._id}>
     <Todo key={todo._id} todo={todo} />
     <DragHandle />
   </li>
@@ -39,6 +39,7 @@ export const SortableTodoList = () => {
   let { todos, getTodos, updateTodoPos,users } = useContext(GlobalContext);
   const [itemsl, setitemsl] = useState({'todos':[],'loaded':true})
   console.log("load Status",itemsl.loaded)
+  console.log(users)
   useEffect(() => {
     
     getTodos()

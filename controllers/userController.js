@@ -63,7 +63,8 @@ exports.loginUser = async (req, res, next) => {
                     return res.json({
                       msg: "User Logged",
                       token,
-                      logged: true
+                      logged: true,
+                      fn:user.firstname
                     });
                   }
                 )

@@ -3,7 +3,9 @@ const appreducer = (state, action) => {
     case "LOGIN_USER":
       return {
         ...state,
-        logged_in: action.logged
+        logged_in: action.logged,
+        ...state.users,
+        firstname : action.fn
       };
 
     case "LOGOUT":

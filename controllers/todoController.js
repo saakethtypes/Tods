@@ -217,8 +217,7 @@ exports.saveSort = async (req, res, next) => {
 
     let userr = req.body.user;
     const userupdate = await User.findByIdAndUpdate(userr, {
-      user_todos: req.body.data,
-      firstname: "Saaketh"
+      user_todos: req.body.data
     });
     //response
     return res.status(200).json({

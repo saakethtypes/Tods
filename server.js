@@ -41,6 +41,7 @@ const connectDb = async () => {
       useCreateIndex: true,
       useFindAndModify: false
     });
+    
     console.log(`MonogoDb Connected: ${conn.connection.host}`.blue.bold);
   } catch (err) {
     console.log(`Error connecting to MongoDb: ${err}`);
