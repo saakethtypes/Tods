@@ -6,7 +6,12 @@ ca7df9*/
   --thmt: localStorage.getItem("thmt");
   --textthm: localStorage.getItem("textthm");
   --line: localStorage.getItem("line");
+  --logout: black;
+  --mile : #F3DE8A;
+  --today: #e7292900 ;
+  --sec:#71bdc700;
 }
+
 body {
   background-color: #efbba0;
   user-select: none; /* supported by Chrome and Opera */
@@ -39,6 +44,7 @@ body {
   padding-top: 3px;
 }
 
+
 .dot {
   position: absolute;
   top: 12px;
@@ -49,6 +55,7 @@ body {
   border-radius: 40%;
   display: inline-block;
 }
+
 .nightoggle {
   position: absolute;
   top: 12px;
@@ -103,14 +110,14 @@ body {
   background-attachment: fixed;
 }
 
-.home {
+/* .home {
   background-color: var(--thmt);
   overflow-x: hidden;
   overflow-y: hidden;
   width: 100%;
   height: 100%;
   height: 100vh;
-}
+} */
 
 .home .sideBar {
   position: absolute;
@@ -132,6 +139,7 @@ body {
 .handels {
   float: right;
 }
+
 .handels i {
   padding: 0.4em;
 }
@@ -157,14 +165,26 @@ body {
   top: 0px;
   left: 0px;
   height: 100%;
-  background-color: var(--thm);
+  background-color: var(--logout);
 }
+
 @media (min-width: 1000px) {
   body {
     background-color: black;
   }
   .bg{
     background-position: 100% 40%;
+  }
+  
+  .home .dotp {
+    height: 7px;
+    width: 7px;
+    position: absolute;
+    left:50%;
+    top:10px;
+    background-color: var(--textthm);
+    border-radius: 50%;
+    display: inline-block;
   }
   .home .todoList {
     position: absolute;
@@ -208,13 +228,14 @@ body {
     right: 6%;
     width: 20%;
   }
+
   .loginStyle {
     position: absolute;
     width: 25%;
     top: 0px;
     left: 0px;
     height: 100%;
-    background-color: var(--thm);
+    background-color: var(--logout);
   }
   .addtodo {
     float: left;
@@ -239,6 +260,7 @@ body {
     border-radius: 40%;
     display: inline-block;
   }
+  
   .home .todoLine {
     max-width: 100%;
   }
@@ -471,7 +493,7 @@ body {
   padding: 2em;
   overflow-x: hidden;
   overflow-y: scroll;
-  height: 83%;
+  height: 85%;
   background-color: var(--thmt);
   scroll-behavior: smooth;
 }
@@ -654,6 +676,7 @@ body {
 .home .todo {
   padding: 1em;
   border-bottom: 1px solid var(--line);
+
   background-color: var(--thmt);
 }
 
@@ -685,7 +708,7 @@ body {
   height: 35px;
 }
 
-.grab:hover .iconify {
+.grab .iconify {
   color: var(--theme);
 }
 
@@ -714,7 +737,7 @@ body {
   float: left;
 }
 
-.deletebut:hover .iconify {
+.deletebut .iconify {
   color: red;
 }
 
@@ -726,7 +749,7 @@ body {
 
   position: relative;
 }
-.editTaskbut:hover .iconify {
+.editTaskbut .iconify {
   color: var(--theme);
 }
 
@@ -738,7 +761,7 @@ body {
   position: relative;
 }
 
-.viewCommentsbut:hover .iconify {
+.viewCommentsbut .iconify {
   color: var(--theme);
 }
 
@@ -754,7 +777,7 @@ body {
   padding-right: -1em;
   left: -10px;
 }
-.addContentbut:hover .iconify {
+.addContentbut .iconify {
   color: var(--theme);
 }
 
@@ -842,6 +865,9 @@ body {
   border-color: var(--theme);
 }
 
+
+
+
 .AllDone .iconify {
   width: 70%;
   height: 70%;
@@ -866,6 +892,7 @@ body {
 	-webkit-text-fill-color: transparent;
 	-webkit-animation: hue 2.5s infinite linear;
 }
+
 
 @keyframes hue {
   from {
@@ -935,6 +962,7 @@ a {
 }
 
 @media (max-width: 500px) {
+
   .MobileDisclaimer {
     display: inline-block;
     font-size: 1em;
@@ -952,7 +980,15 @@ a {
     font-family: "Disposable DroidBB";
     padding-right: -10px;
   }
-
+  .home .dotp {
+    height: 7px;
+    width: 7px;
+    left: 80px;
+    top:30px;
+    background-color: var(--textthm);
+    border-radius: 50%;
+    display: inline-block;
+  }
   .loginInputs .button {
     width: 50%;
     font-size: 1.4em;
@@ -1093,6 +1129,7 @@ a {
     font-size: 1.4em;
     width: 10px;
   }
+  
 
   .greet {
     font-size: 1.4em;
@@ -1234,7 +1271,36 @@ a {
     left:-2%;
     margin-left: 3px;
   }
-  
+  .home .quesmark{
+    color: #3f70bb;
+      font-size: 1.4em;
+      background-color: #00000000;
+      top:10px;
+      border-top: hidden;
+      border-left: hidden;
+      border-right: hidden;
+      border-bottom: hidden;
+
+      left: -5%;
+
+      position: relative;
+      font-family: "Disposable DroidBBold";
+  }
+  .home .infouse {
+    color: #3f70bb;
+    font-size: 1.0em;
+    background-color: #e93030f5;
+    border-top: hidden;
+    border-left: hidden;
+    border-right: hidden;
+    border-bottom: hidden;
+    width:38%;
+    top:-190%;
+    left:-38%;
+    background-color: var(--thm);
+    position: absolute;
+    font-family: "Disposable DroidBBold";
+  }
   .night .iconify{
     height: 24px;
     width: 24px;
@@ -1245,11 +1311,12 @@ a {
     left: 7px;
     top: 25px;
   }
+   
 
   .bg{
     background-position: 40% 50%;
   }
-
+  
   #Usernamee{
   width: 100%;
   font-size: 1.1em;
@@ -1292,6 +1359,39 @@ a {
     padding-bottom: 20px;
     position: fixed;
   }
+
+  .home .infouse {
+  color: #3f70bb;
+  font-size: 1.0em;
+  background-color: #00000000;
+  border-top: hidden;
+  border-left: hidden;
+  border-right: hidden;
+  border-bottom: hidden;
+  width:38%;
+  top:-190%;
+  left:-38%;
+  background-color: var(--thm);
+  position: absolute;
+  font-family: "Disposable DroidBBold";
+}
+
+  .home .quesmark{
+    color: #3f70bb;
+      font-size: 1.7em;
+      background-color: #00000000;
+      top:10px;
+      border-top: hidden;
+      border-left: hidden;
+      border-right: hidden;
+      border-bottom: hidden;
+      top:8%;
+      left:10%;
+  
+      position: absolute;
+      font-family: "Disposable DroidBBold";
+  }
+
   
 }
 
@@ -1303,7 +1403,37 @@ body {
   overflow-y: hidden; /* Hide vertical scrollbar */
   overflow-x: hidden; /* Hide horizontal scrollbar */
 }
+.home .infouse {
+  color: #3f70bb;
+  font-size: 1.0em;
+  background-color: #00000000;
+  border-top: hidden;
+  border-left: hidden;
+  border-right: hidden;
+  border-bottom: hidden;
+  width:100px;
+  top:-190%;
+  left:38px;
+  background-color: var(--thmt);
+  position: absolute;
+  font-family: "Disposable DroidBBold";
+}
 
+.home .quesmark{
+    color: #3f70bb;
+    font-size: 1.7em;
+    background-color: #00000000;
+    top:10px;
+    border-top: hidden;
+    border-left: hidden;
+    border-right: hidden;
+    border-bottom: hidden;
+    top:8%;
+    left:10%;
+
+    position: absolute;
+    font-family: "Disposable DroidBBold";
+}
 .home .todoList {
   overflow-style: var(--theme);
 
@@ -1340,8 +1470,52 @@ body {
   }
 }
 
+.home .mile{
+  /* background-color: var(--mile); */
+  font-family: 'Courier New', Courier, monospace;
+
+  font-size: 15px;
+}
+.dotp {
+  height: 7px;
+  width: 7px;
+  left: -10px;
+  top:10px;
+  background-color: var(--textthm);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.home .sec{
+  border-radius: 3px;
+  background-color: var(--sec);
+}
+
+.home .today{
+  border-bottom: 1px solid var(--line);
+
+  background-color: var(--today);
+}
+
+.home .todayclas{
+  background-color: var(--today);
+
+  color:var(--textthm)
+}
+.home .secclas{
+  background-color: var(--sec);
+  color:var(--textthm)
+}
+.home .mileclas{
+  /* background-color: var(--mile); */
+  font-size: 20px;
+  color: gold
+}
+
+
 
 @media (max-width: 290px) {
+  
   .Addcontentbutin {
     background-color: var(--thmt);
     display: inline;
@@ -1403,5 +1577,34 @@ body {
   .greet {
     font-size: 1.3em;
   }
+  .home .infouse {
+    color: #3f70bb;
+    font-size: 0.9em;
+    background-color: #00000000;
+    border-top: hidden;
+    border-left: hidden;
+    border-right: hidden;
+    border-bottom: hidden;
+    width:45%;
+    top:-190%;
+    left:-35%;
+    background-color: var(--thm);
+    position: absolute;
+    font-family: "Disposable DroidBBold";
+  }
+  .home .quesmark{
+    color: #3f70bb;
+      font-size: 1.4em;
+      background-color: #00000000;
+      top:10px;
+      border-top: hidden;
+      border-left: hidden;
+      border-right: hidden;
+      border-bottom: hidden;
+      top:-10px;
+      left: 4%;
 
+      position: relative;
+      font-family: "Disposable DroidBBold";
+  }
 }

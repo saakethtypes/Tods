@@ -18,6 +18,7 @@
     "react-drag-listview": "^0.1.6",
     "react-draggable-list": "^4.0.3",
     "react-dragula": "^1.1.17",
+    "react-emoji-render": "^1.2.4",
     "react-js-pagination": "^3.0.3",
     "react-loading-animation": "^1.4.0",
     "react-notifications-component": "^2.4.0",

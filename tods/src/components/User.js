@@ -39,20 +39,22 @@ export const User = uid => {
       </div>
       <div className="sideBar">
         <h3 className="greet">
-          Hi <p className="name"> {users.firstname},</p>
+          Hi <p className="name"> {users.firstname},🙆</p>
         </h3>
         <h3 className="count">
           You have, <p className="unfinished">{unfistr}</p> unfinished tasks.
         </h3>
+        
         <div className="trees">
           <img className="tree"src={treefinal4} alt="BillyJean" />
           <img className="tree3" src={treefinal3} alt="BillyJean" />
 
         </div>
+        
         {smile ? (
           <h3 className="chill">
             {" "}
-            You can go get <p className="name">pizza</p> now
+            You can go get <p className="name">pizza🍕</p> now
           </h3>
         ) : null}
       </div> 

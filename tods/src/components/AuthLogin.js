@@ -17,7 +17,8 @@ export const AuthLogin = (props) => {
     <div>
       <div className="loginStyle">
         <div>
-          <div className="Logo">[ todo ]</div>
+          <div className="Logo">[ tods ]</div>
+          
           <nav>
             <div className="loginInputs">
               <form onSubmit={login}>
@@ -42,7 +43,12 @@ export const AuthLogin = (props) => {
                 <button className="button" type="submit">
                   Login
                 </button>
+                <p>Register on top right</p>
               </form>
+              <br></br>
+              <h3>A Minimal todo app</h3>
+              <p> Made by <a href='https://github.com/saakethtypes'>@saakethtypes</a> </p>
+
             </div>
           </nav>
           <div className="Artwork">

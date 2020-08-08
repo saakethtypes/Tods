@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { GlobalContext } from "../context/GlobalState";
 
-export const AddContent = ({ todo_id }) => {
+export const AddContent = ({ todo_id ,styl}) => {
   const [newContent, setNewContent] = useState("");
   const { add_content } = useContext(GlobalContext);
 
@@ -21,11 +21,11 @@ export const AddContent = ({ todo_id }) => {
         <input
           type="text"
           value={newContent}
-          className="ContentInput"
+          className={`ContentInput ${styl}`}
           onChange={e => setNewContent(e.target.value)}
           placeholder="lot of work? oof"
         />
-        <button className="Addcontentbutin">+</button>
+        <button className={`Addcontentbutin ${styl}`}>+</button>
       </form>
     </div>
   );

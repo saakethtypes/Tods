@@ -233,7 +233,7 @@ export const GlobalProvider = ({ children }) => {
         animationIn: ["animated", "fadeIn"],
         animationOut: ["animated", "fadeOut"],
         dismiss: {
-          duration: 500,
+          duration: 800,
         },
       });
     } catch (err) {

@@ -37,9 +37,12 @@ export const Footer = () => {
       saveTheme(theme, "cornsilk", "rgb(227, 215, 241)", "dimgrey", "darkgray");
     }
   }
-
+const [inf, setinf] = useState(false)
   const viewDots = () => {
     y ? sety(false) : sety(true);
+  };
+  const viewInfo = () => {
+    inf ? setinf(false) : setinf(true);
   };
   const toggleBd = () => {
     bd ? toggleDark(false) : toggleDark(true);
@@ -75,12 +78,18 @@ export const Footer = () => {
   }
   return (
     <div className="footer">
+      {inf?<div className='infouse '>
+          <p>T- insert your today's task</p>
+        <p>SEC- insert your section's name</p>
+        <p>MILE- set your milsetone</p>
+          </div>:null}
       <div className="handels">
         <span
           onClick={viewDots}
           className="dot"
           style={{ backgroundColor: theme }}
         ></span>
+        <button className='quesmark' onClick={viewInfo}>?</button>
 
         {y ? (
           <div className="dotss">

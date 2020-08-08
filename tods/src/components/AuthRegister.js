@@ -34,7 +34,7 @@ export const AuthRegister = () => {
         animationIn: ["animated", "fadeIn"],
         animationOut: ["animated", "fadeOut"],
         dismiss: {
-          duration: 1000
+          duration: 1500
         }
       });
     }

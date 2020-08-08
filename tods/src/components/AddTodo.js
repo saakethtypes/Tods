@@ -8,7 +8,6 @@ export const AddTodo = uid => {
 
   //add functions from the globalcontext
   const { add_todo } = useContext(GlobalContext);
-
   //local functions to call the global functions
   const addTodo = e => {
     e.preventDefault();
@@ -35,7 +34,7 @@ export const AddTodo = uid => {
         animationIn: ["animated", "bounceIn"],
         animationOut: ["animated", "fadeOut"],
         dismiss: {
-          duration: 1000
+          duration: 1500
         },
         touch:true,
         slidingExit: {
