@@ -46,7 +46,7 @@ export const GlobalProvider = ({ children }) => {
         },
       };
     
-      await axios.post("/user/register", user, config);
+      await axios.post("/api/user/register", user, config);
       // dispatch({
       //   type: "REGISTER_USER",
       //   uid: uid,
@@ -83,7 +83,7 @@ export const GlobalProvider = ({ children }) => {
       },
     };
     if (token) {
-      const res = await axios.post("/todos/verify",{"token":String(token)},config)
+      const res = await axios.post("/api/todos/verify",{"token":String(token)},config)
       let verified = res.data.veri
         if(!verified){
           localStorage.removeItem("jwt")
@@ -104,7 +104,7 @@ export const GlobalProvider = ({ children }) => {
 
     let usercred = { username: uname, password: pass };
     try {
-      const res = await axios.post("/user/login", usercred, config);
+      const res = await axios.post("/api/user/login", usercred, config);
       localStorage.setItem("jwt", res.data.token);
 
       if (res.data.logged) {
@@ -171,7 +171,7 @@ export const GlobalProvider = ({ children }) => {
         },
       };
 
-      const res = await axios.get("/todos", config);
+      const res = await axios.get("/api/todos", config);
       dispatch({
         type: "GET_TODOS",
         todos: res.data.todos,
@@ -196,7 +196,7 @@ export const GlobalProvider = ({ children }) => {
     };
 
     try {
-      const res = await axios.post("/todos/", todo, config);
+      const res = await axios.post("/api/todos/", todo, config);
       dispatch({
         type: "ADD_TODO",
         uid: uid,
@@ -219,7 +219,7 @@ export const GlobalProvider = ({ children }) => {
       },
     };
     try {
-      await axios.delete(`/todos/${id}`, config);
+      await axios.delete(`/api/todos/${id}`, config);
       dispatch({
         type: "DELETE_TODO",
         payload: id,
@@ -252,7 +252,7 @@ export const GlobalProvider = ({ children }) => {
           "x-auth-token": localStorage.getItem("jwt"),
         },
       };
-      const res = await axios.post(`/todos/${todo_id}`, content, config);
+      const res = await axios.post(`/api/todos/${todo_id}`, content, config);
       dispatch({
         type: "ADD_CONTENT",
         tid: todo_id,
@@ -275,7 +275,7 @@ export const GlobalProvider = ({ children }) => {
       };
 
       let s = "filler";
-      const res = await axios.put(`/todos/${todo_id}`, s, config);
+      const res = await axios.put(`/api/todos/${todo_id}`, s, config);
       
       dispatch({
         type: "CHECKED",
@@ -302,7 +302,7 @@ export const GlobalProvider = ({ children }) => {
         task: editted,
       };
 
-      const res = await axios.patch(`todos/${tid}`, edittedTask, config);
+      const res = await axios.patch(`/api/todos/${tid}`, edittedTask, config);
       dispatch({
         type: "EDIT_TODO_TITLE",
         title: editted,
@@ -324,7 +324,7 @@ export const GlobalProvider = ({ children }) => {
           "x-auth-token": localStorage.getItem("jwt"),
         },
       };
-      await axios.delete(`/todos/${tidd}/${cid}`, config);
+      await axios.delete(`/api/todos/${tidd}/${cid}`, config);
       dispatch({
         type: "DELETE_CONTENT",
         payload: cid,
@@ -374,7 +374,7 @@ export const GlobalProvider = ({ children }) => {
         "x-auth-token": localStorage.getItem("jwt"),
       },
     };
-    await axios.post(`/todos/save`, { data: todosort, user: user }, config);
+    await axios.post(`/api/todos/save`, { data: todosort, user: user }, config);
   }
 
 
