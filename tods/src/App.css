@@ -952,7 +952,7 @@ a {
 }
 
 .Artwork{
-  font-size: 0.8em;
+  font-size: 1.6em;
   color: darkslateblue;
   position: absolute;
   bottom:0;
@@ -1351,7 +1351,7 @@ a {
   }
 
   .Artwork{
-    font-size: 0.6em;
+    font-size: 1.2em;
     color: darkslateblue;
     position: absolute;
     bottom:0;

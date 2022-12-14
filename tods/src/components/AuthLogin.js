@@ -52,7 +52,7 @@ export const AuthLogin = (props) => {
             </div>
           </nav>
           <div className="Artwork">
-              Illustration by Meenakshi 
+              Illustration by <a href="https://instagram.com/dedart.0">Meenakshi</a> 
           </div>
         </div>
       </div>
